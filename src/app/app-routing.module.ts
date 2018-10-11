@@ -15,7 +15,9 @@ const routes: Routes = [
     path: 'list',
     loadChildren: './list/list.module#ListPageModule'
   },
-  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardPageModule' }
+  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardPageModule' },
+  { path: 'scan', loadChildren: './scan/scan.module#ScanPageModule' }
+
 ];
 
 @NgModule({
