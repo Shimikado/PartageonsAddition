@@ -1,0 +1,12 @@
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  .button {
+    position: absolute;
+    color: white;
+    font-size: 1em;
+    top: 80vh;
+    left: 40vw;
+  }
+}

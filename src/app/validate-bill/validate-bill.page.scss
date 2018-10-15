@@ -1,0 +1,12 @@
+@import "../../global.scss";
+
+.light-background {
+  background-color: $main-azur-20;
+  color: $main-blue;
+  font-weight: bold;
+  font-size: 1.6em;
+}
+
+.name {
+  text-transform: uppercase;
+}
