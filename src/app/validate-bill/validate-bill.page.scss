@@ -5,8 +5,18 @@
   color: $main-blue;
   font-weight: bold;
   font-size: 1.6em;
-}
+  margin: 4px;
+ }
 
 .name {
   text-transform: uppercase;
 }
+
+.add-icon {
+  font-size: 2.5em;
+}
+
+.add-card {
+  padding: 5px 5px;
+}
+
