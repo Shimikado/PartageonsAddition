@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { User } from '../shared/models/user';
 import { AngularFireAuth } from 'angularfire2/auth';
+
 
 @Component({
     selector: 'app-home',
@@ -14,7 +14,7 @@ export class HomePage {
     user = {} as User;
 
     constructor(private afAuth: AngularFireAuth,
-                private router: Router, public navParams: NavParams) {
+                private router: Router) {
     }
 
     async login(user: User) {
@@ -36,7 +36,8 @@ export class HomePage {
                 user.password
             );
             if (result) {
-                this.router.navigateByUrl('/home');
+
+                this.router.navigateByUrl('/dashboard');
             }
         } catch (e) {
             console.error(e);

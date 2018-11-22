@@ -22,7 +22,8 @@ const routes: Routes = [
   { path: 'debt', loadChildren: './debt/debt.module#DebtPageModule' },
   { path: 'bill', loadChildren: './bill/bill.module#BillPageModule' },
   { path: 'validate-bill', loadChildren: './validate-bill/validate-bill.module#ValidateBillPageModule' },
-  { path: 'add', loadChildren: './validate-bill/add/add.module#AddPageModule' }
+  { path: 'add', loadChildren: './validate-bill/add/add.module#AddPageModule' },  { path: 'registerConfirmation', loadChildren: './home/register-confirmation/register-confirmation.module#RegisterConfirmationPageModule' }
+
 
 
 ];
