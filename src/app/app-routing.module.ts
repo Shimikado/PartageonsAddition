@@ -16,7 +16,8 @@ const routes: Routes = [
     loadChildren: './list/list.module#ListPageModule'
   },
   { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardPageModule' },
-  { path: 'scan', loadChildren: './scan/scan.module#ScanPageModule' },  { path: 'join', loadChildren: './join/join.module#JoinPageModule' },
+  { path: 'scan', loadChildren: './scan/scan.module#ScanPageModule' },
+  { path: 'join', loadChildren: './join/join.module#JoinPageModule' },
   { path: 'historic', loadChildren: './historic/historic.module#HistoricPageModule' },
   { path: 'debt', loadChildren: './debt/debt.module#DebtPageModule' },
   { path: 'bill', loadChildren: './bill/bill.module#BillPageModule' },

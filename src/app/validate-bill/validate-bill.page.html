@@ -10,10 +10,17 @@
 <ion-content padding>
     <ion-card class="light-background">
         <ion-card-content>
-            <ion-row justify-content-between>
+                <ion-row justify-content-between>
                 <div class="quantity">1</div>
                 <div class="name">Matrimonio</div>
                 <div class="value">9.00</div>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
+    <ion-card class="light-background add-card" >
+        <ion-card-content class="add-card">
+            <ion-row justify-content-end align-self-center>
+                <div align-self-center>Ajouter </div><ion-icon  (click)="openModalAdd();" class="add-icon" name="add-circle" ></ion-icon>
             </ion-row>
         </ion-card-content>
     </ion-card>
