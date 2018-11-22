@@ -28,6 +28,7 @@
     "@ionic/angular": "4.0.0-beta.13",
     "@ionic/pro": "2.0.3",
     "@ngx-progressbar/core": "^5.2.1",
+    "app-scripts": "0.0.0",
     "angularfire2": "^5.1.1",
     "cordova-android": "7.1.1",
     "cordova-plugin-camera": "^4.0.3",
