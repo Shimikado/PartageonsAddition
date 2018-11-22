@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {NgProgress} from '@ngx-progressbar/core';
 import {Camera} from '@ionic-native/camera/ngx';
 import Tesseract from 'tesseract.js';
+import {ActionSheetController} from '@ionic/angular';
 
 @Component({
     selector: 'app-scan',
@@ -17,7 +18,8 @@ export class ScanPage implements OnInit {
     tesseractConfig;
 
     constructor(private camera: Camera,
-                public progress: NgProgress, private router: Router) {
+                public progress: NgProgress, private router: Router,
+                public actionSheetCtrl: ActionSheetController) {
 
         const host = window.location.protocol + '//'
             + window.location.hostname
@@ -28,7 +30,7 @@ export class ScanPage implements OnInit {
             langPath: host + 'assets/lib/',
             corePath: host + 'assets/lib/tesseract-core.js',
         });
-        console.log( host + 'assets/lib/worker.js');
+        console.log(host + 'assets/lib/worker.js');
         this.tesseractConfig = {
             // If you want to set the language explicitly:
             lang: 'fra',
@@ -37,18 +39,18 @@ export class ScanPage implements OnInit {
         };
     }
 
-    /*selectSource() {
-        const actionSheet = this.actionSheetCtrl.create({
+    async selectSource() {
+        const actionSheet = await this.actionSheetCtrl.create({
             buttons: [
                 {
                     text: 'Use Library',
                     handler: () => {
-                        this.getPicture(this.camera.PictureSourceType.PHOTOLIBRARY);
+                        this.goToBill(this.camera.PictureSourceType.PHOTOLIBRARY);
                     }
                 }, {
                     text: 'Capture Image',
-                    handler: () => {
-                        this.getPicture(this.camera.PictureSourceType.CAMERA);
+                    handler: async() => {
+                        this.goToBill(this.camera.PictureSourceType.CAMERA);
                     }
                 }, {
                     text: 'Cancel',
@@ -56,49 +58,52 @@ export class ScanPage implements OnInit {
                 }
             ]
         });
-        actionSheet.present();
+        await actionSheet.present();
     }
 
-    getPicture(sourceType: PictureSourceType) {
-        this.camera.getPicture({
+    /*
+        getPicture(sourceType: PictureSourceType) {
+            this.camera.getPicture({
+                quality: 100,
+                destinationType: this.camera.DestinationType.DATA_URL,
+                sourceType: sourceType,
+                allowEdit: true,
+                saveToPhotoAlbum: false,
+                correctOrientation: true
+            }).then((imageData) => {
+                this.selectedImage = `data:image/jpeg;base64,${imageData}`;
+            });
+        }
+
+        recognizeImage() {
+            Tesseract.recognize(this.selectedImage)
+                .progress(message => {
+                    if (message.status === 'recognizing text')
+                        this.progress.set(message.progress);
+                })
+                .catch(err => console.error(err))
+                .then(result => {
+                    this.imageText = result.text;
+                })
+                .finally(resultOrError => {
+                    this.progress.complete();
+                });
+        }*/
+
+    async goToBill(source) {
+        await this.camera.getPicture({
             quality: 100,
             destinationType: this.camera.DestinationType.DATA_URL,
-            sourceType: sourceType,
             allowEdit: true,
             saveToPhotoAlbum: false,
+            // sourceType: this.camera.PictureSourceType.CAMERA,
+            sourceType: source,
             correctOrientation: true
         }).then((imageData) => {
+            this.imageText = 'Photo prises ! Veuillez patienter';
             this.selectedImage = `data:image/jpeg;base64,${imageData}`;
+            this.imageText = 'Step 1';
         });
-    }
-
-    recognizeImage() {
-        Tesseract.recognize(this.selectedImage)
-            .progress(message => {
-                if (message.status === 'recognizing text')
-                    this.progress.set(message.progress);
-            })
-            .catch(err => console.error(err))
-            .then(result => {
-                this.imageText = result.text;
-            })
-            .finally(resultOrError => {
-                this.progress.complete();
-            });
-    }*/
-    goToBill() {
-        this.camera.getPicture({
-                   quality: 100,
-                   destinationType: this.camera.DestinationType.DATA_URL,
-                   allowEdit: true,
-                   saveToPhotoAlbum: false,
-                   sourceType: this.camera.PictureSourceType.CAMERA,
-                   correctOrientation: true
-               }).then((imageData) => {
-                   this.imageText = 'Photo prises ! Veuillez patienter';
-                   this.selectedImage = `data:image/jpeg;base64,${imageData}`;
-                   this.imageText = 'Step 1';
-               });
     }
 
     recognizeImage() {
