@@ -4,7 +4,7 @@ import {Platform} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import * as firebase from 'firebase/app';
-import {AuthentificationService} from './services/authentification.service';
+import {AuthentificationService} from './shared/services/authentification.service';
 
 
 @Component({

@@ -11,7 +11,9 @@ import {AppRoutingModule} from './app-routing.module';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
+import {FactureService} from './shared/services/factureService';
 
 
 @NgModule({
@@ -23,11 +25,13 @@ import { environment } from '../environments/environment';
         AppRoutingModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireDatabaseModule,
+        AngularFirestoreModule,
     ],
     providers: [
         StatusBar,
         SplashScreen,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+        FactureService,
     ],
     bootstrap: [AppComponent]
 })
