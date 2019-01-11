@@ -9,8 +9,8 @@ export class FactureService {
     constructor(private firestore: AngularFirestore) {
     }
 
-    getFactures(): Observable<any[]> {
-        const userId = 'aze2e31za3e1';
+    // userId = 'aze2e31za3e1'
+    getFactures(userId: string): Observable<any[]> {
         return this.firestore.collection(`factures`, ref => ref.where('user_ID', '==', userId)).valueChanges();
     }
 
