@@ -12,8 +12,15 @@
         <ion-card-content *ngFor="let item of listItem">
             <ion-row justify-content-between>
                 <div class="quantity">{{item.quantity}}</div>
-                <div class="name">{{item.name}}</div>
-                <div class="value">{{item.value}} €</div>
+                <div class="name">{{item.label}}</div>
+                <div class="value">{{item.prix}} €</div>
+            </ion-row>
+        </ion-card-content>
+        <ion-card-content>
+            <ion-row justify-content-between class="add-row">
+                <div class="value">Ajouter
+                    <ion-icon name="add-circle" class="icon add-icon"></ion-icon>
+                </div>
             </ion-row>
         </ion-card-content>
     </ion-card>
@@ -30,7 +37,7 @@
 <ion-footer no-border>
     <ion-toolbar color="secondary" class="footer">
         <ion-row>
-            <ion-title content>Total : 46 €</ion-title>
+            <ion-title content>Total : {{sum}} €</ion-title>
             <ion-button large end>Validate</ion-button>
         </ion-row>
 

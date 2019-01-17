@@ -20,3 +20,17 @@
   padding: 5dp 5dp;
 }
 
+
+
+.add-row {
+  float: right;
+  width: 23vw;
+  .value {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .add-icon {
+      font-size: 3em;
+    }
+  }
+}

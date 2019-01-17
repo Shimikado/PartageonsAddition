@@ -16,6 +16,7 @@ export class ScanPage implements OnInit {
     imageText = 'Prenez une photo !';
     tesseract: Tesseract;
     tesseractConfig;
+    public scanDone = false;
 
     constructor(private camera: Camera,
                 public progress: NgProgress, private router: Router,
@@ -71,36 +72,8 @@ export class ScanPage implements OnInit {
             '1 happy meal 2.5 €' +
             '2 big mac 3.5 €' +
             'Total 6 €';
+        this.scanDone = true;
     }
-
-    /*
-        getPicture(sourceType: PictureSourceType) {
-            this.camera.getPicture({
-                quality: 100,
-                destinationType: this.camera.DestinationType.DATA_URL,
-                sourceType: sourceType,
-                allowEdit: true,
-                saveToPhotoAlbum: false,
-                correctOrientation: true
-            }).then((imageData) => {
-                this.selectedImage = `data:image/jpeg;base64,${imageData}`;
-            });
-        }
-
-        recognizeImage() {
-            Tesseract.recognize(this.selectedImage)
-                .progress(message => {
-                    if (message.status === 'recognizing text')
-                        this.progress.set(message.progress);
-                })
-                .catch(err => console.error(err))
-                .then(result => {
-                    this.imageText = result.text;
-                })
-                .finally(resultOrError => {
-                    this.progress.complete();
-                });
-        }*/
 
     async goToBill(source) {
         await this.camera.getPicture({
@@ -125,9 +98,15 @@ export class ScanPage implements OnInit {
             .progress((v) => this.imageText = v.status)
             .catch((e) => this.imageText = 'Erreur : ' + e)
             .then(
-                recognizedText =>
-                    this.imageText = recognizedText.text,
+                recognizedText => {
+                    this.imageText = recognizedText.text;
+                    this.scanDone = true;
+                },
             );
+    }
+
+    validate() {
+        this.router.navigateByUrl(`validate-bill?inputText=${this.imageText}`);
     }
 
     ngOnInit(): void {
