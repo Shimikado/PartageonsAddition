@@ -49,8 +49,13 @@ export class ScanPage implements OnInit {
                     }
                 }, {
                     text: 'Capture Image',
-                    handler: async() => {
+                    handler: async () => {
                         this.goToBill(this.camera.PictureSourceType.CAMERA);
+                    }
+                }, {
+                    text: 'Mock',
+                    handler: async () => {
+                        this.mockValue();
                     }
                 }, {
                     text: 'Cancel',
@@ -59,6 +64,13 @@ export class ScanPage implements OnInit {
             ]
         });
         await actionSheet.present();
+    }
+
+    private mockValue() {
+        this.imageText = 'Recette :' +
+            '1 happy meal 2.5 €' +
+            '2 big mac 3.5 €' +
+            'Total 6 €';
     }
 
     /*

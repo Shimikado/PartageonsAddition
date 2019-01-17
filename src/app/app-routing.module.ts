@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: 'validate-bill', loadChildren: './validate-bill/validate-bill.module#ValidateBillPageModule' }
 
 
+
 ];
 
 @NgModule({

@@ -9,6 +9,13 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { environment } from '../environments/environment';
+import {FactureService} from './shared/services/factureService';
+
+
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
@@ -16,11 +23,15 @@ import {AppRoutingModule} from './app-routing.module';
         BrowserModule,
         IonicModule.forRoot(),
         AppRoutingModule,
+        AngularFireModule.initializeApp(environment.firebase),
+        AngularFireDatabaseModule,
+        AngularFirestoreModule,
     ],
     providers: [
         StatusBar,
         SplashScreen,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+        FactureService,
     ],
     bootstrap: [AppComponent]
 })

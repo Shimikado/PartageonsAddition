@@ -6,5 +6,19 @@
   </ion-toolbar>
 
 <ion-content>
-FORM TO CREATE
+    <form (ngSubmit)="addItem()">
+        <ion-item>
+            <ion-label>Nom</ion-label>
+            <ion-input type="text" [(ngModel)]="element.name" name="name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Quantité</ion-label>
+            <ion-textarea [(ngModel)]="element.quantity" name="quantity"></ion-textarea>
+        </ion-item>
+        <ion-item>
+            <ion-label>Prix</ion-label>
+            <ion-textarea [(ngModel)]="element.value" name="value"></ion-textarea>
+        </ion-item>
+        <button ion-button type="submit" block>Add</button>
+    </form>
 </ion-content>

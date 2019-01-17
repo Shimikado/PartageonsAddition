@@ -4,11 +4,14 @@ import {Platform} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import * as firebase from 'firebase/app';
+import {AuthentificationService} from './shared/services/authentification.service';
+
 
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
     styleUrls: ['app.component.scss']
+
 })
 export class AppComponent {
     public appPages = [
@@ -34,7 +37,8 @@ export class AppComponent {
     constructor(
         private platform: Platform,
         private splashScreen: SplashScreen,
-        private statusBar: StatusBar
+        private statusBar: StatusBar,
+        private authService: AuthentificationService,
     ) {
         this.initializeApp();
     }
@@ -53,6 +57,7 @@ export class AppComponent {
             storageBucket: 'partageons-l-addition.appspot.com',
             messagingSenderId: '389644409346'
         };
+        this.authService.setAuthToken(configFirebase);
         firebase.initializeApp(configFirebase);
     }
 }
