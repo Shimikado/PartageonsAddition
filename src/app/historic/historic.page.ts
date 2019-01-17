@@ -14,12 +14,6 @@ export class HistoricPage implements OnInit {
     }
 
     ngOnInit() {
-        this.factureService.getFactures('aze2e31za3e1').subscribe(
-            value => {
-                this.factures = value;
-                debugger;
-            }
-        );
         debugger;
     }
 

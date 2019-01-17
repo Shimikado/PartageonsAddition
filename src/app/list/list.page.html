@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -9,19 +9,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of items">
-      <ion-icon [name]="item.icon" slot="start"></ion-icon>
-      {{item.title}}
-      <div class="item-note" slot="end">
-        {{item.note}}
-      </div>
-    </ion-item>
-  </ion-list>
-  <!--
-    <div *ngIf="selectedItem" padding>
-      You navigated here from <b>{{selectedItem.title }}</b>
+<ion-content padding class="content">
+  <ion-card class="light-background" *ngIf="facture && facture.lignes">
+    <div *ngFor="let line of facture.lignes">
+      <ion-card-content *ngFor="let product of line.produits" (click)="selectProduct(product)">
+        <ion-row justify-content-between>
+          <div class="quantity">{{product.quantity}}</div>
+          <div class="name">{{product.label}}</div>
+          <div class="value">{{product.prix}} €</div>
+        </ion-row>
+      </ion-card-content>
     </div>
-  -->
+  </ion-card>
 </ion-content>

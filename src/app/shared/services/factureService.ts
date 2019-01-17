@@ -1,7 +1,8 @@
 import {Injectable} from '@angular/core';
-import {AngularFirestore} from 'angularfire2/firestore';
 import {Observable} from 'rxjs';
 import {Facture} from '../models/facture';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {map} from 'rxjs/operators';
 
 @Injectable()
 export class FactureService {
@@ -9,13 +10,23 @@ export class FactureService {
     constructor(private firestore: AngularFirestore) {
     }
 
-    // userId = 'aze2e31za3e1'
-    getFactures(userId: string): Observable<any[]> {
-        return this.firestore.collection(`factures`, ref => ref.where('user_ID', '==', userId)).valueChanges();
+    addFacture(facture: Facture): Observable<Facture> {
+        const data = JSON.parse(JSON.stringify(facture));
+        return Observable.create(this.firestore.collection(`factures`)
+            .add(data));
     }
 
-    addFacture(facture: Facture): Observable<any> {
-        return Observable.create(this.firestore.collection(`factures`)
-            .add(facture));
+    // userId = 'aze2e31za3e1'
+    getFactures(ID: string): Observable<Facture> {
+        return this.firestore.collection<Facture>(`factures`, ref => ref.where('ID', '==', ID)).snapshotChanges().pipe(
+            map(factures => {
+                const facture = factures[0];
+                if (facture) {
+                    const data = facture.payload.doc.data() as Facture;
+                    return {...data};
+                }
+                return null;
+            }),
+        );
     }
 }
