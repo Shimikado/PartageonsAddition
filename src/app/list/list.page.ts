@@ -25,11 +25,13 @@ export class ListPage implements OnInit {
                 }
             );
         });
+        /*
         this.authentifcationService.getAuthToken().subscribe(
             token => {
                 this.user = token;
             }
         );
+        */
     }
 
     ngOnInit() {
