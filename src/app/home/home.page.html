@@ -14,7 +14,7 @@
                 </div>
                 <div class="input">
                     <ion-icon name="lock"></ion-icon>
-                    <ion-input type="password" placeholder="Mot de passe" [(ngModel)]="user.password">></ion-input>
+                    <ion-input type="password" placeholder="Mot de passe" [(ngModel)]="user.password"></ion-input>
                 </div>
 
             </div>
@@ -22,7 +22,7 @@
                 <ion-button  (click)="login(user)">LOGIN</ion-button>
                 <ion-button  (click)="register(user)">S'ENREGISTRER</ion-button>
             </div>
-            <div>Mot de passe oublié</div>
+            <ion-button  (click)="generatePassword(user)">Mot de passe Oublié</ion-button>
         </div>
     </div>
 </ion-content>
