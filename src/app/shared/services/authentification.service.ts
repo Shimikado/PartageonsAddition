@@ -1,21 +1,23 @@
 import {Injectable} from '@angular/core';
 import {Subject} from 'rxjs';
+import {User} from '../models/user';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthentificationService {
 
-    private authToken: Subject<any> = new Subject<any>();
+    private authUser: Subject<User> = new Subject<User>();
 
     constructor() {
     }
 
-    getAuthToken() {
-        return this.authToken.asObservable();
+    getAuthUser() {
+        return this.authUser.asObservable();
     }
 
-    setAuthToken(value) {
-        this.authToken.next(value);
+    setAuthUser(value) {
+        this.authUser.next(value);
     }
+
 }
