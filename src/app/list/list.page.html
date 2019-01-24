@@ -1,24 +1,22 @@
 <ion-header>
-  <ion-toolbar color="secondary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      List
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="secondary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            List
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content padding class="content">
-  <ion-card class="light-background" *ngIf="facture && facture.lignes">
-    <div *ngFor="let line of facture.lignes">
-      <ion-card-content *ngFor="let product of line.produits" (click)="selectProduct(product)">
-        <ion-row justify-content-between>
-          <div class="quantity">{{product.quantity}}</div>
-          <div class="name">{{product.label}}</div>
-          <div class="value">{{product.prix}} €</div>
-        </ion-row>
-      </ion-card-content>
-    </div>
-  </ion-card>
+    <ion-card class="light-background" *ngIf="facture">
+        <ion-card-content *ngFor="let product of facture.produits" (click)="selectProduct(product)">
+            <ion-row justify-content-between>
+                <div class="quantity">{{product.quantity}}</div>
+                <div class="name">{{product.label}}</div>
+                <div class="value">{{product.prix}} €</div>
+            </ion-row>
+        </ion-card-content>
+    </ion-card>
 </ion-content>

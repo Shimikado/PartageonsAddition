@@ -1,8 +1,8 @@
-import {LigneFacture} from './ligne_facture';
+import {Produit} from './produit';
 
 export interface Facture {
     ID: string;
-    user_ID: string;
+    users_ID: string[];
     done: string;
-    lignes: LigneFacture[];
+    produits: Produit[];
 }
