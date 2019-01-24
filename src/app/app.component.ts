@@ -57,7 +57,6 @@ export class AppComponent {
             storageBucket: 'partageons-l-addition.appspot.com',
             messagingSenderId: '389644409346'
         };
-        this.authService.setAuthToken(configFirebase);
         firebase.initializeApp(configFirebase);
     }
 }
