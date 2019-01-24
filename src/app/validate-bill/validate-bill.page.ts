@@ -6,7 +6,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Produit} from '../shared/models/produit';
 import {FactureService} from '../shared/services/factureService';
 import {Facture} from '../shared/models/facture';
-import {LigneFacture} from '../shared/models/ligne_facture';
 
 
 @Component({
@@ -61,27 +60,20 @@ export class ValidateBillPage implements OnInit {
 
     public validate() {
         // On doit save la facture pour la rendre accessible à tous et envoyer l'id dans la page suivante
-        const ligneFacture: LigneFacture = new class implements LigneFacture {
-            devise: string;
-            nom: string;
-            prix_total: string;
-            produits: Produit[];
-        };
-        ligneFacture.prix_total = `${this.sum}`;
-        ligneFacture.devise = '€';
-        ligneFacture.nom = '';
-        ligneFacture.produits = this.listItem;
+        const produits = this.listItem;
         const facture: Facture = new class implements Facture {
             ID: string;
             done: string;
-            lignes: LigneFacture[];
-            user_ID: string;
+            produits: Produit[];
+            users_ID: string[];
         };
         facture.done = 'false';
-        facture.lignes = [ligneFacture];
-        facture.user_ID = '123';
+        facture.produits = produits;
+        facture.users_ID = ['123'];
         const now = new Date();
-        facture.ID = facture.user_ID + now.getFullYear().toString()[2] + now.getFullYear().toString()[3] + now.getMonth() + now.getDay() + now.getHours();
+        // TODO remplacer user ID par un random en 3 chiffres
+        facture.ID = facture.users_ID[0] + now.getFullYear().toString()[2]
+            + now.getFullYear().toString()[3] + now.getMonth() + now.getDay() + now.getHours();
         this.factureService.addFacture(facture);
         this.router.navigateByUrl('list?id=' + facture.ID);
     }
