@@ -17,7 +17,7 @@ export class ListPage implements OnInit {
 
     // On doit recuperer la liste grâce à l'id provenant de validate bill
     constructor(private activeRoute: ActivatedRoute, private factureService: FactureService,
-                private authentifcationService: AuthentificationService) {
+                private authService: AuthentificationService) {
         this.activeRoute.queryParams.subscribe(data => {
             this.factureService.getFactures(data['id']).subscribe(
                 facture => {

@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Produit} from '../shared/models/produit';
 import {FactureService} from '../shared/services/factureService';
 import {Facture} from '../shared/models/facture';
+import {AuthentificationService} from '../shared/services/authentification.service';
 
 
 @Component({
@@ -18,10 +19,12 @@ export class ValidateBillPage implements OnInit {
     public listItem: Produit[];
     private inputText: string;
     public sum: number;
+    public userId: string;
 
     constructor(public modalController: ModalController,
                 private router: Router,
                 private factureService: FactureService,
+                private authService: AuthentificationService,
                 private activeRoute: ActivatedRoute) {
         this.listItem = [];
         this.sum = 0;
@@ -29,6 +32,11 @@ export class ValidateBillPage implements OnInit {
             this.inputText = data.inputText;
             this.billParser();
         });
+        this.authService.getAuthUser().subscribe(
+            token => {
+                this.userId = token.uid;
+            }
+        );
     }
 
     ngOnInit() {
@@ -69,7 +77,7 @@ export class ValidateBillPage implements OnInit {
         };
         facture.done = 'false';
         facture.produits = produits;
-        facture.users_ID = ['123'];
+        facture.users_ID = [this.userId];
         const now = new Date();
         // TODO remplacer user ID par un random en 3 chiffres
         facture.ID = facture.users_ID[0] + now.getFullYear().toString()[2]

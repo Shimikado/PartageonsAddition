@@ -12,7 +12,6 @@ export const environment = {
         storageBucket: 'partageons-l-addition.appspot.com',
         messagingSenderId: '389644409346'
     },
-
 };
 
 /*
