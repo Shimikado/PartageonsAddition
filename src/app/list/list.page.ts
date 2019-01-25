@@ -19,7 +19,7 @@ export class ListPage implements OnInit {
     constructor(private activeRoute: ActivatedRoute, private factureService: FactureService,
                 private authService: AuthentificationService) {
         this.activeRoute.queryParams.subscribe(data => {
-            this.factureService.getFactures(data['id']).subscribe(
+            this.factureService.getFacturesByShortId(data['id'], new Date()).subscribe(
                 facture => {
                     this.facture = facture;
                 }

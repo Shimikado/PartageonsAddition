@@ -29,4 +29,23 @@ export class FactureService {
             }),
         );
     }
+
+    getFacturesByShortId(short_ID: string, date: Date): Observable<Facture> {
+        const oneDay = 1000 * 60 * 60 * 24;
+        debugger;
+        if (new Date().getTime() - date.getTime() > oneDay) {
+            console.error('wrong day');
+            return null;
+        }
+        return this.firestore.collection<Facture>(`factures`, ref => ref.where('short_ID', '==', short_ID)).snapshotChanges().pipe(
+            map(factures => {
+                const facture = factures[0];
+                if (facture) {
+                    const data = facture.payload.doc.data() as Facture;
+                    return {...data};
+                }
+                return null;
+            }),
+        );
+    }
 }

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {User} from '../models/user';
 
 @Injectable({
@@ -7,7 +7,7 @@ import {User} from '../models/user';
 })
 export class AuthentificationService {
 
-    private authUser: Subject<User> = new Subject<User>();
+    private authUser: BehaviorSubject<User> = new BehaviorSubject<User>(null);
 
     constructor() {
     }

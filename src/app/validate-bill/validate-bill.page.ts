@@ -7,6 +7,7 @@ import {Produit} from '../shared/models/produit';
 import {FactureService} from '../shared/services/factureService';
 import {Facture} from '../shared/models/facture';
 import {AuthentificationService} from '../shared/services/authentification.service';
+import random from '@angular-devkit/schematics/src/rules/random';
 
 
 @Component({
@@ -35,6 +36,7 @@ export class ValidateBillPage implements OnInit {
         this.authService.getAuthUser().subscribe(
             token => {
                 this.userId = token.uid;
+                debugger;
             }
         );
     }
@@ -78,12 +80,14 @@ export class ValidateBillPage implements OnInit {
         facture.done = 'false';
         facture.produits = produits;
         facture.users_ID = [this.userId];
+        facture.short_ID = '' + Math.random() * 1000;
+        facture.created_date = new Date();
         const now = new Date();
         // TODO remplacer user ID par un random en 3 chiffres
         facture.ID = facture.users_ID[0] + now.getFullYear().toString()[2]
             + now.getFullYear().toString()[3] + now.getMonth() + now.getDay() + now.getHours();
         this.factureService.addFacture(facture);
-        this.router.navigateByUrl('list?id=' + facture.ID);
+        this.router.navigateByUrl('list?id=' + facture.short_ID);
     }
 
     async openModalAdd() {
