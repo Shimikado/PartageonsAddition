@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 
 import {ModalController} from '@ionic/angular';
-import {AddPage} from './add/add.page';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Produit} from '../shared/models/produit';
 import {FactureService} from '../shared/services/factureService';
 import {Facture} from '../shared/models/facture';
+import { ModalItemBillPage } from './modal-item-bill/modal-item-bill.page';
 
 
 @Component({
@@ -80,12 +80,13 @@ export class ValidateBillPage implements OnInit {
 
     async openModalAdd() {
         const modal = await this.modalController.create({
-            component: AddPage,
+            component: ModalItemBillPage,
             componentProps: {value: 123}
         });
         modal.onDidDismiss()
             .then((data) => {
                 const produit: Produit = data.data;
+                console.log(produit);
                 this.listItem.push(produit);
             });
         return await modal.present();

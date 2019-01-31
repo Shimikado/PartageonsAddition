@@ -22,7 +22,9 @@ const routes: Routes = [
     {path: 'debt', loadChildren: './debt/debt.module#DebtPageModule'},
     {path: 'bill', loadChildren: './bill/bill.module#BillPageModule'},
     {path: 'validate-bill', loadChildren: './validate-bill/validate-bill.module#ValidateBillPageModule'},
-    {path: 'register', loadChildren: './register/register.module#RegisterPageModule'}
+    {path: 'register', loadChildren: './register/register.module#RegisterPageModule'},
+  { path: 'ModalItemBill', loadChildren: './validate-bill/modal-item-bill/modal-item-bill.module#ModalItemBillPageModule' },
+
 
 
 ];
