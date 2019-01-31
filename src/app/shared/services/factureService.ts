@@ -16,7 +16,6 @@ export class FactureService {
             .add(data));
     }
 
-    // userId = 'aze2e31za3e1'
     getFactures(ID: string): Observable<Facture> {
         return this.firestore.collection<Facture>(`factures`, ref => ref.where('ID', '==', ID)).snapshotChanges().pipe(
             map(factures => {
