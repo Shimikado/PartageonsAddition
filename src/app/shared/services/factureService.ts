@@ -31,21 +31,37 @@ export class FactureService {
     }
 
     getFacturesByShortId(short_ID: string, date: Date): Observable<Facture> {
-        const oneDay = 1000 * 60 * 60 * 24;
-        debugger;
-        if (new Date().getTime() - date.getTime() > oneDay) {
-            console.error('wrong day');
-            return null;
+        return this.getFactures(this.getIdFromNow(short_ID));
+    }
+
+    private stringGen(len: number) {
+        let text = '';
+
+        const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+
+        for (let i = 0; i < len; i++) {
+            text += charset.charAt(Math.floor(Math.random() * charset.length));
         }
-        return this.firestore.collection<Facture>(`factures`, ref => ref.where('short_ID', '==', short_ID)).snapshotChanges().pipe(
-            map(factures => {
-                const facture = factures[0];
-                if (facture) {
-                    const data = facture.payload.doc.data() as Facture;
-                    return {...data};
-                }
-                return null;
-            }),
-        );
+
+        return text;
+    }
+
+    public generateId(): string {
+        const now = new Date();
+        return this.stringGen(4) + this.getDateStringFormatId(now);
+    }
+
+    public getIdFromNow(shortId: string): string {
+        const now = new Date();
+        return this.getIdFromDate(shortId, now);
+    }
+
+    public getIdFromDate(shortId: string, date: Date): string {
+        return shortId + this.getDateStringFormatId(date);
+    }
+
+    private getDateStringFormatId(date: Date): string {
+        return date.getFullYear().toString()[2]
+            + date.getFullYear().toString()[3] + date.getMonth() + date.getDay() + date.getHours();
     }
 }
