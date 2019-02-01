@@ -14,7 +14,6 @@ export class HistoricPage implements OnInit {
     }
 
     ngOnInit() {
-        debugger;
     }
 
 }
