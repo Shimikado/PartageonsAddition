@@ -6,7 +6,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ValidateBillPage } from './validate-bill.page';
-import {AddPage} from './add/add.page';
+import { ModalItemBillPage } from './modal-item-bill/modal-item-bill.page';
+
 
 const routes: Routes = [
     {
@@ -22,7 +23,7 @@ const routes: Routes = [
         IonicModule,
         RouterModule.forChild(routes)
     ],
-    declarations: [ValidateBillPage, AddPage],
-    entryComponents: [AddPage]
+    declarations: [ValidateBillPage, ModalItemBillPage],
+    entryComponents: [ModalItemBillPage]
 })
 export class ValidateBillPageModule {}

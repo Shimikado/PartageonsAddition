@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {User} from '../shared/models/user';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {AuthentificationService} from '../shared/services/authentification.service';
+import {ToastController} from '@ionic/angular';
 
 
 @Component({
@@ -16,20 +17,58 @@ export class HomePage {
 
     constructor(private afAuth: AngularFireAuth,
                 private router: Router,
-                private authService: AuthentificationService) {
+                private authService: AuthentificationService,
+                public toastController: ToastController) {
     }
 
+
     async login(user: User) {
+        let messageToast = '';
         try {
-            const result = await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
-            if (result) {
-                debugger;
-                user.name = result.user.displayName;
-                user.uid = result.user.uid;
-                user.password = null;
-                this.authService.setAuthUser(user);
-                this.router.navigateByUrl('/dashboard');
-            }
+            const result = await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password)
+                .then(sucess => {
+                    user.name = sucess.user.displayName;
+                    user.uid = sucess.user.uid;
+                    user.password = null;
+                    this.authService.setAuthUser(user);
+                    messageToast = 'Bonjour ' + user.name;
+                    this.router.navigateByUrl('/dashboard');
+                })
+                .catch(error => {
+                    messageToast = 'Email ou Mot de passe invalide';
+                    }
+
+                );
+            const toastEmail = await this.toastController.create({
+                message: messageToast,
+                duration: 2000,
+                position: 'top'
+            });
+            toastEmail.present();
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }
+
+    async generatePassword(user: User) {
+        let messageToast = '';
+        try {
+
+            const result = await this.afAuth.auth.sendPasswordResetEmail(user.email)
+                .then(data => {
+                    messageToast = 'Email de génération du nouveau mot de passe envoyé à: ' + user.email;
+                })
+                .catch(error => {
+                    messageToast = 'merci de saisir une adresse Email valide';
+                });
+            const toastEmail = await this.toastController.create({
+                message: messageToast,
+                duration: 2000,
+                position: 'top'
+            });
+            toastEmail.present();
+
         }
         catch (e) {
             console.error(e);

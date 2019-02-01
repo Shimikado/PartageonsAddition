@@ -5,7 +5,7 @@ import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import * as firebase from 'firebase/app';
 import {AuthentificationService} from './shared/services/authentification.service';
-import {environment} from '../environments/environment';
+import {User} from './shared/models/user';
 
 
 @Component({
@@ -15,6 +15,7 @@ import {environment} from '../environments/environment';
 
 })
 export class AppComponent {
+    user = {} as User;
     public appPages = [
         {
             title: 'Scanner une addition',
@@ -42,6 +43,8 @@ export class AppComponent {
         private authService: AuthentificationService,
     ) {
         this.initializeApp();
+        this.authService.getAuthUser()
+            .subscribe(user => this.user = user);
     }
 
     initializeApp() {
