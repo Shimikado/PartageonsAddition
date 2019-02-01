@@ -9,14 +9,35 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content padding class="content">
-    <ion-card class="light-background" *ngIf="facture">
-        <ion-card-content *ngFor="let product of facture.produits" (click)="selectProduct(product)">
+<ion-content padding class="content" *ngIf="facture && !loading">
+    <ion-card class="light-background">
+        <ion-card-content class="default-color" *ngFor="let product of facture.produits; let i = index"
+                          (click)="selectProduct(i)"
+                          [ngClass]="{'my-product':product.uids.includes(user.uid), 'other-product':product.uids.length === product.quantity && !product.uids.includes(user.uid)}">
             <ion-row justify-content-between>
-                <div class="quantity">{{product.quantity}}</div>
+                <div class="quantity">{{product.uids.length}}/{{product.quantity}}</div>
                 <div class="name">{{product.label}}</div>
                 <div class="value">{{product.prix}} €</div>
             </ion-row>
         </ion-card-content>
     </ion-card>
+    <ion-card>
+        <ion-card-content *ngFor="let user of facture.users">
+            <div>
+                <div>{{user.name}}</div>
+                <div>{{user.uid}}</div>
+            </div>
+        </ion-card-content>
+    </ion-card>
+    <ion-card>
+        <ion-card-content>
+            <div>
+                <div>Prix total : {{sum}} {{facture.produits[0].devise}}</div>
+                <div>Reste a prendre: {{restToTake}} </div>
+            </div>
+        </ion-card-content>
+    </ion-card>
+</ion-content>
+<ion-content padding class="content" *ngIf="!facture || loading">
+    Loading ...
 </ion-content>

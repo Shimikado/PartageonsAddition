@@ -8,10 +8,10 @@
               <ion-col col-4>
                   <img src="../../assets/images/user-profile.png"/>
               </ion-col>
-              <ion-col col-8>
+              <ion-col *ngIf="user" col-8>
                 <div class="profile-container">
-                  <ion-title>{{ this.user.name }}</ion-title>
-                  <ion-label>{{ this.user.email }}</ion-label>
+                  <ion-title>{{ user.name }}</ion-title>
+                  <ion-label>{{ user.email }}</ion-label>
                 </div>
               </ion-col>
             </ion-row>
