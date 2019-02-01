@@ -96,8 +96,10 @@ export class ValidateBillPage implements OnInit {
         modal.onDidDismiss()
             .then((data) => {
                 const produit: Produit = data.data;
-                console.log(produit);
-                this.listItem.push(produit);
+                if (!isNaN(produit.prix)){
+                    this.listItem.push(produit);
+                    this.sum += produit.prix;
+                }
             });
         return await modal.present();
     }
