@@ -3,10 +3,17 @@
 .light-background {
   background-color: $main-azur-20;
   color: $main-blue;
+ }
+
+
+.light-background {
+  background-color: $main-azur-20;
+  color: $main-blue;
   font-weight: bold;
   font-size: 1.6em;
   margin: 4px;
- }
+}
+
 
 .name {
   text-transform: uppercase;
@@ -20,8 +27,6 @@
   padding: 5dp 5dp;
 }
 
-
-
 .add-row {
   float: right;
   width: 23vw;
@@ -34,3 +39,34 @@
     }
   }
 }
+
+.action {
+  visibility: hidden;
+  width: 30vw;
+  background: $main-blue;
+  padding: 2dp 2dp;
+  position:absolute;
+  right:0;
+  top:0;
+  height: 100%;
+  vertical-align: center;
+  .value {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+  }
+  .action-icon {
+    margin:8px;
+    padding-left: 8px;
+    font-size: 2em;
+    color: #FFFFFF;
+    align-self: center;
+
+
+  }
+
+}
+
+
