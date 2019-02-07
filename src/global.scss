@@ -19,3 +19,13 @@ $main-azur:#0097a7;
 $main-azur-20: #0097a720;
 
 $soft-orange:#ff8351;
+
+.wideModal{
+  .modal-wrapper {
+    width: 80%;
+    left: calc(20% - (80%/2));
+    height: 60%;
+    top: calc(40% - (40%/2)/2);
+  }
+}
+

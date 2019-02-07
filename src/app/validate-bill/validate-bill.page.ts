@@ -5,9 +5,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Produit} from '../shared/models/produit';
 import {FactureService} from '../shared/services/factureService';
 import {Facture} from '../shared/models/facture';
-import { ModalItemBillPage } from './modal-item-bill/modal-item-bill.page';
+import {ModalItemBillPage} from './modal-item-bill/modal-item-bill.page';
 import {AuthentificationService} from '../shared/services/authentification.service';
-import { AlertController } from '@ionic/angular';
+import {AlertController} from '@ionic/angular';
+import {isNull, isUndefined} from 'util';
 
 
 @Component({
@@ -93,17 +94,17 @@ export class ValidateBillPage implements OnInit {
     async openModalAdd() {
         const modal = await this.modalController.create({
             component: ModalItemBillPage,
-            componentProps: {action: 'Create'},
-           // cssClass: "wideModal"
+            componentProps: {action: 'Créer'},
+            cssClass: 'wideModal'
         });
+
         modal.onDidDismiss()
             .then((data) => {
-
-                const produit: Produit = data.data;
-                if (!isNaN(produit.prix)) {
+                if (!isUndefined(data.data)) {
+                    const produit: Produit = data.data;
                     this.listItem.push(produit);
-                    this.sum += produit.prix;
                 }
+
             });
         return await modal.present();
     }
@@ -112,23 +113,20 @@ export class ValidateBillPage implements OnInit {
         const modal = await this.modalController.create({
             component: ModalItemBillPage,
             componentProps: {
-                action: 'Update',
+                action: 'Modifier',
                 produit: this.listItem[i],
             },
-            // cssClass: "wideModal"
+            cssClass: 'wideModal'
         });
         modal.onDidDismiss()
             .then((data) => {
-                const produit: Produit = data.data;
-                this.listItem[i].prix = produit.prix;
-                this.listItem[i].quantity = produit.quantity;
-                this.listItem[i].nom = produit.nom;
-                this.calculateTotalAmount();
-/*
-                if (!isNaN(produit.prix)) {
-                    this.listItem.push(produit);
-                    this.sum += produit.prix;
-                }*/
+                if (!isUndefined(data.data)) {
+                    const produit: Produit = data.data;
+                    this.listItem[i].prix = produit.prix;
+                    this.listItem[i].quantity = produit.quantity;
+                    this.listItem[i].nom = produit.nom;
+                    this.calculateTotalAmount();
+                }
             });
         return await modal.present();
     }
@@ -170,7 +168,7 @@ export class ValidateBillPage implements OnInit {
     public calculateTotalAmount() {
         let amount = 0;
         for (let i = 0; i < this.listItem.length; i++) {
-            amount += this.listItem[i].prix ;
+            amount += this.listItem[i].prix;
         }
         this.sum = amount;
     }
