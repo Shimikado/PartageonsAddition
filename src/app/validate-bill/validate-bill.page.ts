@@ -49,7 +49,6 @@ export class ValidateBillPage implements OnInit {
 
     private billParser() {
         this.listItem = [];
-        this.sum = 0;
         const currentList = this.inputText.match(/[0-9]+[a-zA-Z ]+[0-9 ]+[\., ]*[0-9 ]*€/g);
         currentList.forEach(
             element => {
@@ -65,10 +64,10 @@ export class ValidateBillPage implements OnInit {
                     quantity: +quantity.trim(),
                     nom: 'Jean mich mich'.trim(),
                 };
-                this.sum += product.prix;
                 this.listItem.push(product);
             }
         );
+        this.calculateTotalAmount();
     }
 
     public validate() {
@@ -103,6 +102,7 @@ export class ValidateBillPage implements OnInit {
                 if (!isUndefined(data.data)) {
                     const produit: Produit = data.data;
                     this.listItem.push(produit);
+                    this.calculateTotalAmount();
                 }
 
             });
@@ -146,6 +146,7 @@ export class ValidateBillPage implements OnInit {
                     text: 'Supprimer',
                     handler: () => {
                         this.listItem.splice(i, 1);
+                        this.calculateTotalAmount();
                     }
                 }
             ]
@@ -168,7 +169,7 @@ export class ValidateBillPage implements OnInit {
     public calculateTotalAmount() {
         let amount = 0;
         for (let i = 0; i < this.listItem.length; i++) {
-            amount += this.listItem[i].prix;
+            amount += this.listItem[i].prix * this.listItem[i].quantity;
         }
         this.sum = amount;
     }
