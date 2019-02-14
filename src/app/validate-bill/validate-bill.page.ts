@@ -5,8 +5,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Produit} from '../shared/models/produit';
 import {FactureService} from '../shared/services/factureService';
 import {Facture} from '../shared/models/facture';
-import { ModalItemBillPage } from './modal-item-bill/modal-item-bill.page';
+import {ModalItemBillPage} from './modal-item-bill/modal-item-bill.page';
 import {AuthentificationService} from '../shared/services/authentification.service';
+import {AlertController} from '@ionic/angular';
+import {isNull, isUndefined} from 'util';
 
 
 @Component({
@@ -25,7 +27,8 @@ export class ValidateBillPage implements OnInit {
                 private router: Router,
                 private factureService: FactureService,
                 private authService: AuthentificationService,
-                private activeRoute: ActivatedRoute) {
+                private activeRoute: ActivatedRoute,
+                public alertController: AlertController) {
         this.listItem = [];
         this.sum = 0;
         this.activeRoute.queryParams.subscribe(data => {
@@ -46,7 +49,6 @@ export class ValidateBillPage implements OnInit {
 
     private billParser() {
         this.listItem = [];
-        this.sum = 0;
         const currentList = this.inputText.match(/[0-9]+[a-zA-Z ]+[0-9 ]+[\., ]*[0-9 ]*€/g);
         currentList.forEach(
             element => {
@@ -59,13 +61,13 @@ export class ValidateBillPage implements OnInit {
                     label: label.trim(),
                     prix: +prix.trim(),
                     devise: devise.trim(),
-                    quantity: quantity.trim(),
+                    quantity: +quantity.trim(),
                     nom: 'Jean mich mich'.trim(),
                 };
-                this.sum += product.prix;
                 this.listItem.push(product);
             }
         );
+        this.calculateTotalAmount();
     }
 
     public validate() {
@@ -91,15 +93,86 @@ export class ValidateBillPage implements OnInit {
     async openModalAdd() {
         const modal = await this.modalController.create({
             component: ModalItemBillPage,
-            componentProps: {value: 123}
+            componentProps: {action: 'Créer'},
+            cssClass: 'wideModal'
         });
+
         modal.onDidDismiss()
             .then((data) => {
-                const produit: Produit = data.data;
-                console.log(produit);
-                this.listItem.push(produit);
+                if (!isUndefined(data.data)) {
+                    const produit: Produit = data.data;
+                    this.listItem.push(produit);
+                    this.calculateTotalAmount();
+                }
+
             });
         return await modal.present();
     }
+
+    async openModalUpdate(i) {
+        const modal = await this.modalController.create({
+            component: ModalItemBillPage,
+            componentProps: {
+                action: 'Modifier',
+                produit: this.listItem[i],
+            },
+            cssClass: 'wideModal'
+        });
+        modal.onDidDismiss()
+            .then((data) => {
+                if (!isUndefined(data.data)) {
+                    const produit: Produit = data.data;
+                    this.listItem[i].prix = produit.prix;
+                    this.listItem[i].quantity = produit.quantity;
+                    this.listItem[i].nom = produit.nom;
+                    this.calculateTotalAmount();
+                }
+            });
+        return await modal.present();
+    }
+
+    async presentAlertConfirm(i) {
+        const alert = await this.alertController.create({
+            header: 'Suppression',
+            message: 'Souhaitez vous supprimer cet élément ?',
+            buttons: [
+                {
+                    text: 'Annuler',
+                    role: 'annuler',
+                    cssClass: 'secondary',
+                    handler: () => {
+                    }
+                }, {
+                    text: 'Supprimer',
+                    handler: () => {
+                        this.listItem.splice(i, 1);
+                        this.calculateTotalAmount();
+                    }
+                }
+            ]
+        });
+
+        await alert.present();
+
+    }
+
+    public diplayActionButtons(i) {
+        const name = 'actionButtons-' + i;
+        if (document.getElementById(name).style.visibility === 'hidden') {
+            document.getElementById(name).style.visibility = 'visible';
+        } else {
+            document.getElementById(name).style.visibility = 'hidden';
+        }
+
+    }
+
+    public calculateTotalAmount() {
+        let amount = 0;
+        for (let i = 0; i < this.listItem.length; i++) {
+            amount += this.listItem[i].prix * this.listItem[i].quantity;
+        }
+        this.sum = amount;
+    }
+
 
 }

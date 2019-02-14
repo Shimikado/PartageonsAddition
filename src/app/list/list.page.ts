@@ -31,7 +31,6 @@ export class ListPage implements OnInit {
                             this.facture.users_ID.forEach(uid => {
                                 this.authService.getUser(uid).subscribe(
                                     userLoaded => {
-                                        debugger;
                                         return;
                                     }
                                 );

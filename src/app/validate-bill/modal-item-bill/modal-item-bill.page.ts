@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import {Produit} from '../../shared/models/produit';
+import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+
 
 
 @Component({
@@ -10,9 +12,18 @@ import {Produit} from '../../shared/models/produit';
 })
 export class ModalItemBillPage implements OnInit {
   produit = {} as Produit;
+  action: string;
 
-  constructor(private modalCtrl: ModalController) {
+  item_form: FormGroup;
 
+  constructor(private modalCtrl: ModalController,
+    public formBuilder: FormBuilder) {
+
+      this.item_form = this.formBuilder.group({
+          quantite: new FormControl(this.produit.quantity, Validators.required),
+          label: new FormControl(this.produit.label, Validators.required),
+          prix: new FormControl(this.produit.prix, Validators.required),
+      });
   }
 
   ngOnInit() {
@@ -20,8 +31,10 @@ export class ModalItemBillPage implements OnInit {
   }
 
     public addItem(produit) {
-        console.log(produit);
         this.modalCtrl.dismiss(this.produit);
     }
 
+    public close() {
+        this.modalCtrl.dismiss();
+    }
 }

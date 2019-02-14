@@ -2,6 +2,6 @@ export interface Produit {
     label: string;
     prix: number;
     devise: string;
-    quantity: string;
+    quantity: number;
     nom: string;
 }

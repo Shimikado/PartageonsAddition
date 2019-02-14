@@ -14,6 +14,8 @@ import {FactureService} from './shared/services/factureService';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
+import { IonicStorageModule } from '@ionic/storage';
+
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireDatabaseModule,
         AngularFirestoreModule,
+        IonicStorageModule.forRoot()
     ],
     providers: [
         StatusBar,
