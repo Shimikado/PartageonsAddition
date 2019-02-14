@@ -1,0 +1,4 @@
+<div class="user-bubble" [ngClass]="{'mini-width': !active}">
+    <div class="icon-bubble">{{user.name[0]}}</div>
+    <div class="user-label" *ngIf="active">{{user.name}}</div>
+</div>

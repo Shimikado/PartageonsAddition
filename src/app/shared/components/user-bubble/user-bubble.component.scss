@@ -1,0 +1,35 @@
+@import "../../../../global.scss";
+
+.mini-width {
+  width: 35px !important;
+}
+
+.user-bubble {
+  display: flex;
+  flex-direction: row;
+  width: 130px;
+  height: 35px;
+  border-radius: 55px;
+  color: white;
+
+  .icon-bubble {
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    background-color: $dark-blue;
+    line-height: 35px;
+    border-radius: 55px;
+    z-index: 2;
+  }
+
+  .user-label {
+    position: absolute;
+    height: 35px;
+    width: 130px;
+    border-radius: 55px;
+    background-color: $main-blue;
+    z-index: 1;
+    padding-left: 40px;
+    line-height: 35px;
+  }
+}

@@ -10,34 +10,40 @@
 </ion-header>
 
 <ion-content padding class="content" *ngIf="facture && !loading">
-    <ion-card class="light-background">
-        <ion-card-content class="default-color" *ngFor="let product of facture.produits; let i = index"
-                          (click)="selectProduct(i)"
-                          [ngClass]="{'my-product':product.uids.includes(user.uid), 'other-product':product.uids.length === product.quantity && !product.uids.includes(user.uid)}">
+    <div class="light-background">
+        <ion-card class="default-color" *ngFor="let product of facture.produits; let i = index"
+                  (click)="selectProduct(i)"
+                  [ngClass]="{'my-product':product.uids.includes(userShow.uid), 'other-product':product.uids.length === product.quantity && !product.uids.includes(userShow.uid)}">
             <ion-row justify-content-between>
                 <div class="quantity">{{product.uids.length}}/{{product.quantity}}</div>
                 <div class="name">{{product.label}}</div>
                 <div class="value">{{product.prix}} €</div>
             </ion-row>
-        </ion-card-content>
-    </ion-card>
-    <ion-card>
-        <ion-card-content *ngFor="let user of facture.users">
-            <div>
-                <div>{{user.name}}</div>
-                <div>{{user.uid}}</div>
-            </div>
-        </ion-card-content>
-    </ion-card>
-    <ion-card>
-        <ion-card-content>
-            <div>
-                <div>Prix total : {{sum}} {{facture.produits[0].devise}}</div>
-                <div>Reste a prendre: {{restToTake}} </div>
-            </div>
-        </ion-card-content>
-    </ion-card>
+        </ion-card>
+<!--        <div class="tips-content">
+            <div>Pourboire :</div>
+            <ion-card>
+                <ion-input class="tips"></ion-input>
+            </ion-card>
+        </div>-->
+
+    </div>
+    <ion-item-divider></ion-item-divider>
+    <div class="users">
+        <app-user-bubble [user]="user" [active]="user.uid === userShow.uid" *ngFor="let user of facture.users"
+                         (click)="seeUserData(user)" class="user"></app-user-bubble>
+    </div>
 </ion-content>
 <ion-content padding class="content" *ngIf="!facture || loading">
     Loading ...
 </ion-content>
+<ion-footer no-border>
+    <ion-toolbar color="secondary" class="footer">
+        <ion-row>
+            <ion-title content>Prix total : {{sum}} {{facture.produits[0].devise}}</ion-title>
+            <ion-button large end *ngIf="restToTake>0">Reste {{restToTake}}</ion-button>
+            <ion-button large end *ngIf="restToTake<=0">Suivant</ion-button>
+        </ion-row>
+
+    </ion-toolbar>
+</ion-footer>

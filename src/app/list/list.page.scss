@@ -1,11 +1,45 @@
-.default-color{
-  background-color: lightyellow;
+@import "../../global.scss";
+
+.default-color {
+  height: 47px;
+  padding: 0 5%;
+  line-height: 47px;
+  font-size: 1.2em;
 }
 
-.my-product{
-  background-color: lightblue;
+.my-product {
+  background-color: $main-blue;
+  color: white;
 }
 
-.other-product{
-  background-color: lightgray;
+.other-product {
+  background-color: gray;
+}
+
+.tips-content {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  .tips {
+    width: 20%;
+    margin-left: 40%;
+  }
+}
+
+.light-background {
+  height: 82%;
+}
+
+.users {
+  display: flex;
+  flex-direction: row;
+  width: 80%;
+  margin-top: 2%;
+  overflow: auto;
+
+  .user {
+    margin-left: 2%;
+  }
 }

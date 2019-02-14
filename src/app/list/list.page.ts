@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {FactureService} from '../shared/services/factureService';
 import {Facture} from '../shared/models/facture';
 import {AuthentificationService} from '../shared/services/authentification.service';
+import {UserInBase} from '../shared/models/userInBase';
 
 @Component({
     selector: 'app-list',
@@ -12,6 +13,7 @@ import {AuthentificationService} from '../shared/services/authentification.servi
 export class ListPage implements OnInit {
     public facture: Facture;
     public user: any;
+    public userShow: any;
     private REFRESH_TIMER = 2000;
     public loading = false;
     public sum = 0;
@@ -24,6 +26,7 @@ export class ListPage implements OnInit {
         this.authService.getAuthUser().subscribe(
             user => {
                 this.user = user;
+                this.userShow = user;
                 this.activeRoute.queryParams.subscribe(data => {
                     this.factureService.getFacturesByShortId(data['id'], new Date()).subscribe(
                         facture => {
@@ -53,6 +56,9 @@ export class ListPage implements OnInit {
     }
 
     public selectProduct(productIndex: number) {
+        if (this.user !== this.userShow) {
+            return;
+        }
         const updateFacture = this.facture;
         // Si la liste est pleine et que je ne suis pas dedans, je ne peux pas interragir
         if (updateFacture.produits[productIndex].uids.length === updateFacture.produits[productIndex].quantity
@@ -79,5 +85,12 @@ export class ListPage implements OnInit {
                 this.cd.markForCheck();
             }
         );
+    }
+
+    seeUserData(user: UserInBase) {
+        this.userShow = user;
+        if (user.uid === this.user.uid) {
+            this.userShow = this.user;
+        }
     }
 }
