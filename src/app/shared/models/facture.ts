@@ -1,9 +1,10 @@
 import {Produit} from './produit';
+import {UserInBase} from './userInBase';
 
 export interface Facture {
     ID: string;
     created_date: Date;
-    users_ID: string[];
+    users: UserInBase[];
     done: string;
     produits: Produit[];
 }

@@ -3,5 +3,5 @@ export interface Produit {
     prix: number;
     devise: string;
     quantity: number;
-    nom: string;
+    uids: string[];
 }

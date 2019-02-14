@@ -7,6 +7,7 @@ import {FactureService} from '../shared/services/factureService';
 import {Facture} from '../shared/models/facture';
 import {ModalItemBillPage} from './modal-item-bill/modal-item-bill.page';
 import {AuthentificationService} from '../shared/services/authentification.service';
+import {UserInBase} from '../shared/models/userInBase';
 import {AlertController} from '@ionic/angular';
 import {isNull, isUndefined} from 'util';
 
@@ -21,7 +22,7 @@ export class ValidateBillPage implements OnInit {
     public listItem: Produit[];
     private inputText: string;
     public sum: number;
-    public userId: string;
+    public user: UserInBase;
 
     constructor(public modalController: ModalController,
                 private router: Router,
@@ -38,7 +39,7 @@ export class ValidateBillPage implements OnInit {
         this.authService.getAuthUser().subscribe(
             token => {
                 if (token) {
-                    this.userId = token.uid;
+                    this.user = token;
                 }
             }
         );
@@ -61,8 +62,8 @@ export class ValidateBillPage implements OnInit {
                     label: label.trim(),
                     prix: +prix.trim(),
                     devise: devise.trim(),
-                    quantity: +quantity.trim(),
-                    nom: 'Jean mich mich'.trim(),
+                    quantity: parseInt(quantity.trim(), 10),
+                    uids: [],
                 };
                 this.listItem.push(product);
             }
@@ -78,16 +79,16 @@ export class ValidateBillPage implements OnInit {
             created_date: Date;
             done: string;
             produits: Produit[];
-            short_ID: string;
-            users_ID: string[];
+            users: UserInBase[];
         };
         facture.done = 'false';
         facture.produits = produits;
-        facture.users_ID = [this.userId];
+        facture.users = [this.user];
         facture.created_date = new Date();
         facture.ID = this.factureService.generateId();
-        this.factureService.addFacture(facture);
-        this.router.navigateByUrl('list?id=' + facture.ID.substring(0, 4));
+        this.factureService.addFacture(facture).then(() => {
+            this.router.navigateByUrl('list?id=' + facture.ID.substring(0, 4));
+        });
     }
 
     async openModalAdd() {
@@ -124,7 +125,7 @@ export class ValidateBillPage implements OnInit {
                     const produit: Produit = data.data;
                     this.listItem[i].prix = produit.prix;
                     this.listItem[i].quantity = produit.quantity;
-                    this.listItem[i].nom = produit.nom;
+                    this.listItem[i].label = produit.label;
                     this.calculateTotalAmount();
                 }
             });
