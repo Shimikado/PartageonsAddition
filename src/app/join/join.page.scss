@@ -1,0 +1,30 @@
+@import "../../global.scss";
+
+.join {
+  color: $main-blue;
+  font-weight: bold;
+  font-size: 1.6em;
+}
+
+.refBill {
+  width: 130px;
+}
+
+.join-button{
+  width: 150px;
+}
+
+.input-join{
+  color: $main-blue;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+
+}

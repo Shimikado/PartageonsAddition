@@ -3,10 +3,24 @@
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>join</ion-title>
+        <ion-title>Rejoindre une addition</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
+    <form [formGroup]="item_form" (submit)="joinBill()" class="content">
+        <ion-item align-self-center >
+            <div class="join" align-self-center>Addition à rejoindre</div>
+        </ion-item>
+        <ion-item class="refBill" align-self-center>
+            <ion-label color="primary" position="floating">Référence</ion-label>
+            <ion-input class ="input-join" type="string" formControlName="idBill" (input)="validate()" [(ngModel)]="idBill" [ngClass]="{'valid-bill':!isValid}"
+                       required></ion-input>
+        </ion-item>
+        <ion-row  align-self-center>
+            <ion-button class="join-button" expand="block" type="submit" [disabled]="!item_form.valid">Rejoindre</ion-button>
+        </ion-row>
+
+    </form>
 
 </ion-content>
