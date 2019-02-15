@@ -21,4 +21,8 @@ export class DashboardPage implements OnInit {
         this.router.navigateByUrl('/scan');
     }
 
+    public goToJoin() {
+        this.router.navigateByUrl('/join');
+    }
+
 }
