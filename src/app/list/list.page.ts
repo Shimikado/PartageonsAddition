@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FactureService} from '../shared/services/factureService';
 import {Facture} from '../shared/models/facture';
 import {AuthentificationService} from '../shared/services/authentification.service';
@@ -21,7 +21,8 @@ export class ListPage implements OnInit {
 
     // On doit recuperer la liste grâce à l'id provenant de validate bill
     constructor(private activeRoute: ActivatedRoute, protected factureService: FactureService,
-                private authService: AuthentificationService, private cd: ChangeDetectorRef) {
+                private router: Router, private authService: AuthentificationService,
+                private cd: ChangeDetectorRef) {
         this.factureService = factureService;
         this.authService.getAuthUser().subscribe(
             user => {
@@ -92,5 +93,9 @@ export class ListPage implements OnInit {
         if (user.uid === this.user.uid) {
             this.userShow = this.user;
         }
+    }
+
+    goToResult() {
+        this.router.navigateByUrl('result?id=' + this.facture.ID.substring(0, 4));
     }
 }
