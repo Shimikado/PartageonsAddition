@@ -3,29 +3,28 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-
 @import "~@ionic/angular/css/padding.css";
 @import "~@ionic/angular/css/float-elements.css";
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-$dark-blue:#001970;
-$main-blue:#303f9f;
-$light-blue:#1464f6;
+$dark-blue: unquote('#001970');
+$main-blue: unquote('#303f9f');
+$light-blue: unquote('#1464f6');
 
-$light-azur:#56c8d8;
-$main-azur:#0097a7;
-$main-azur-20: #0097a720;
+$light-azur: unquote('#56c8d8');
+$main-azur: unquote('#0097a7');
+$main-azur-20: unquote('#0097a720');
 
-$soft-orange:#ff8351;
+$soft-orange: unquote('#ff8351');
 
-.wideModal{
+.wideModal {
   .modal-wrapper {
     width: 80%;
-    left: calc(20% - (80%/2));
+    left: calc(20% - (80% / 2));
     height: 60%;
-    top: calc(40% - (40%/2)/2);
+    top: calc(40% - (40% / 2) / 2);
   }
 }
 
