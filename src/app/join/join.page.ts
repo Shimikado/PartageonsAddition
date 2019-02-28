@@ -1,10 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Validators, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {FactureService} from '../shared/services/factureService';
-import {ToastController} from '@ionic/angular';
-import {isNull} from 'util';
-import {of} from 'rxjs';
 
 @Component({
     selector: 'app-join',
@@ -20,8 +17,7 @@ export class JoinPage implements OnInit {
     constructor(
         public formBuilder: FormBuilder,
         private router: Router,
-        private factureService: FactureService,
-        public toastController: ToastController) {
+        private factureService: FactureService) {
         this.item_form = this.formBuilder.group({
             idBill: new FormControl(this.idBill, Validators.required),
         });
@@ -31,11 +27,11 @@ export class JoinPage implements OnInit {
     }
 
     validate() {
-       console.log('change');
+        console.log('change');
     }
 
     joinBill() {
-        if (this.item_form.valid) {
+        if (this.item_form && this.item_form.valid) {
             const now = new Date();
             const f = this.factureService.getFacturesByShortId(this.idBill.toUpperCase(), now).subscribe(
                 (facture) => {
