@@ -29,18 +29,20 @@
 
     </div>
     <ion-item-divider></ion-item-divider>
+
+</ion-content>
+<ion-content padding class="content" *ngIf="!facture || loading">
+    Loading ...
+</ion-content>
+<ion-footer no-border class ="footer-user">
     <div class="users">
         <app-user-bubble [user]="user" [active]="user.uid === userShow.uid" *ngFor="let user of facture.users"
                          (click)="seeUserData(user)" class="user"></app-user-bubble>
         <div class="user-bubble">
             <div class="icon-bubble" (click)="openModalJoin();">+</div>
         </div>
-
     </div>
-</ion-content>
-<ion-content padding class="content" *ngIf="!facture || loading">
-    Loading ...
-</ion-content>
+</ion-footer>
 <ion-footer no-border>
     <ion-toolbar color="secondary" class="footer">
         <ion-row>

@@ -43,8 +43,9 @@ export class FactureService {
 
     getAllFactures(): Observable<Facture> {
 
-        return this.firestore.collection('factures').snapshotChanges().pipe(
+        return this.firestore.collection('factures').doc('facture').snapshotChanges().pipe(
             map(factures => {
+                console.log(factures[0]);
                 const facture = factures[0];
                 if (facture) {
                     const data = facture.payload.doc.data() as Facture;
@@ -52,7 +53,7 @@ export class FactureService {
                 }
                 return null;
             }),
-        );;
+        );
 
 
     }
