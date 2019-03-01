@@ -43,3 +43,27 @@
     margin-left: 2%;
   }
 }
+
+
+.user-bubble {
+  display: flex;
+  flex-direction: row;
+  padding-left:5px;
+  height: 35px;
+  border-radius: 55px;
+  color: $main-blue;
+
+  .icon-bubble {
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    background-color: white;
+    line-height: 35px;
+    border-radius: 55px;
+    z-index: 2;
+    border: 2px dashed $main-blue;
+    font-size: 1.2em;
+
+  }
+
+}

@@ -4,6 +4,12 @@ import {FactureService} from '../shared/services/factureService';
 import {Facture} from '../shared/models/facture';
 import {AuthentificationService} from '../shared/services/authentification.service';
 import {UserInBase} from '../shared/models/userInBase';
+import {UserJoinPage} from './user-join/user-join.page';
+import {ModalController} from '@ionic/angular';
+import {ModalItemBillPage} from '../validate-bill/modal-item-bill/modal-item-bill.page';
+import {isUndefined} from "util";
+import {Produit} from '../shared/models/produit';
+
 
 @Component({
     selector: 'app-list',
@@ -20,7 +26,7 @@ export class ListPage implements OnInit {
     public restToTake = 0;
 
     // On doit recuperer la liste grâce à l'id provenant de validate bill
-    constructor(private activeRoute: ActivatedRoute, protected factureService: FactureService,
+    constructor(public modalController: ModalController, private activeRoute: ActivatedRoute, protected factureService: FactureService,
                 private router: Router, private authService: AuthentificationService,
                 private cd: ChangeDetectorRef) {
         this.factureService = factureService;
@@ -97,5 +103,17 @@ export class ListPage implements OnInit {
 
     goToResult() {
         this.router.navigateByUrl('result?id=' + this.facture.ID.substring(0, 4));
+    }
+
+    async openModalJoin() {
+        const modal = await this.modalController.create({
+            component: UserJoinPage,
+            componentProps: {
+                action: 'Rejoindre',
+                id: this.facture.ID.substring(0, 4),
+            },
+            cssClass: 'wideModal'
+        });
+        return await modal.present();
     }
 }
