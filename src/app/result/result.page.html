@@ -12,4 +12,37 @@
 
 <ion-content padding>
 
+<ion-grid>
+    <ion-row *ngFor="let userPrice of users_prices; let i = index;" >
+      <ion-col  size="8">
+        <app-user-bubble [user]="users_prices[i].user" [active]="true"
+                         class="user"></app-user-bubble>
+      </ion-col>
+      <ion-col  size="4">
+      </ion-col>
+      <ion-col  size="6">
+      </ion-col>
+      <ion-col  size="6">
+        <div class="montant">Total: {{users_prices[i].price}} {{users_prices[i].devise}}</div>
+      </ion-col>
+      <ion-item-divider></ion-item-divider>
+    </ion-row>
+
+  <ion-row >
+    <ion-col  size="12">
+      <div class="montantTotal">Montant Total: {{montantFacture}} {{users_prices[0].devise}}</div>
+    </ion-col>
+  </ion-row>
+  </ion-grid>
 </ion-content>
+
+
+<ion-footer no-border>
+  <ion-toolbar color="secondary" class="footer">
+    <ion-row justify-content-between="">
+      <ion-button large end (click)="goToUpdate()">Détail addition</ion-button>
+      <ion-button large end (click)="validate()">Paiement</ion-button>
+    </ion-row>
+
+  </ion-toolbar>
+</ion-footer>
