@@ -69,9 +69,16 @@ export class ScanPage implements OnInit {
 
     private mockValue() {
         this.imageText = 'Recette :' +
-            '1 happy meal 2.5 €' +
-            '2 big mac 3.5 €' +
-            'Total 6 €';
+            '2 Plats du jour 13 €' +
+            '2 Badoit 3 €' +
+            '1 Coca Zero 3.5 €' +
+            '1 Fanta 3.4 €' +
+            '1 Entree Salade 6.5 €' +
+            '1 Entree Terrine 7 €' +
+            '1 Merveilleux 8.5 €' +
+            '1 Cafe Gourmand 5 €' +
+            '1 Cafe  2 €' +
+            'Total 67.9 €';
         this.scanDone = true;
     }
 
