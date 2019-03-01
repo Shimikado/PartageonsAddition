@@ -1,0 +1,19 @@
+@import "../../global.scss";
+
+.light-background {
+  background-color: $main-blue;
+  color: white;
+  font-size: 1.9em;
+  margin: 15px;
+  padding: 15px;
+}
+
+.value {
+  font-weight: bold;
+  font-size: 1.4em;
+}
+
+.facture {
+  font-size: 1.4em;
+}
+
