@@ -6,6 +6,8 @@ import {RouterModule} from '@angular/router';
 
 import {ListPage} from './list.page';
 import {SharedModule} from '../shared/shared.module';
+import { UserJoinPage } from './user-join/user-join.page';
+
 
 @NgModule({
     imports: [
@@ -20,7 +22,8 @@ import {SharedModule} from '../shared/shared.module';
             }
         ])
     ],
-    declarations: [ListPage]
+    declarations: [ListPage, UserJoinPage],
+    entryComponents: [UserJoinPage]
 })
 export class ListPageModule {
 }

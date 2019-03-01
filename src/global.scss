@@ -25,6 +25,7 @@ $soft-orange: unquote('#ff8351');
     left: calc(20% - (80% / 2));
     height: 60%;
     top: calc(40% - (40% / 2) / 2);
+    border: 2px solid $main-blue;
   }
 }
 
