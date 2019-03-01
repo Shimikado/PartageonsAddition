@@ -4,7 +4,7 @@
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
         <ion-title>
-            List
+            Addition
         </ion-title>
     </ion-toolbar>
 </ion-header>
@@ -40,11 +40,9 @@
 <ion-footer no-border>
     <ion-toolbar color="secondary" class="footer">
         <ion-row>
-            <ion-title content *ngIf="facture && facture.produits && facture.produits.length > 0">Prix total : {{sum}}
-                {{facture.produits[0].devise}}
-            </ion-title>
-            <ion-button large end *ngIf="restToTake>0">Reste {{restToTake}}</ion-button>
-            <ion-button large end *ngIf="restToTake<=0">Suivant</ion-button>
+            <ion-title content>Prix total : {{sum}} {{facture.produits[0].devise}}</ion-title>
+            <ion-button large end *ngIf="restToTake>0" >Reste {{restToTake}}</ion-button>
+            <ion-button large end *ngIf="restToTake<=0" (click)="goToResult()">Suivant</ion-button>
         </ion-row>
 
     </ion-toolbar>

@@ -41,6 +41,25 @@ export class FactureService {
         );
     }
 
+    getAllFactures(): Observable<Facture> {
+
+        return this.firestore.collection('factures').snapshotChanges().pipe(
+            map(factures => {
+                const facture = factures[0];
+                if (facture) {
+                    const data = facture.payload.doc.data() as Facture;
+                    return {...data};
+                }
+                return null;
+            }),
+        );;
+
+
+    }
+
+
+
+
     getFacturesByShortId(short_ID: string, date: Date): Observable<Facture> {
         return this.getFactures(this.getIdFromNow(short_ID));
     }

@@ -1,0 +1,17 @@
+@import "../../global.scss";
+.montant {
+  padding: 0 5%;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: $main-blue;
+  float: right;
+}
+
+.montantTotal {
+  padding: 5%;
+  font-size: 1.3em;
+  font-weight: bold;
+  color: $main-blue;
+  float: right;
+}
+
