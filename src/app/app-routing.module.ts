@@ -25,6 +25,7 @@ const routes: Routes = [
     {path: 'register', loadChildren: './register/register.module#RegisterPageModule'},
   { path: 'ModalItemBill', loadChildren: './validate-bill/modal-item-bill/modal-item-bill.module#ModalItemBillPageModule' },  { path: 'result', loadChildren: './result/result.module#ResultPageModule' },
   { path: 'user-join', loadChildren: './list/user-join/user-join.module#UserJoinPageModule' },
+  { path: 'debt-modal', loadChildren: './debt/debt-modal/debt-modal.module#DebtModalPageModule' },
 
 
 
