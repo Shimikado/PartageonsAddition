@@ -8,7 +8,7 @@ export interface Dette {
     userTo: User;
     amount: number;
     refund: boolean;
-    refundDate: string;
+    refundDate: Date;
     factures: Facture[];
     users: User[];
 }

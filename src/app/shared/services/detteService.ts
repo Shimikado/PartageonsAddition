@@ -7,10 +7,11 @@ import 'rxjs-compat/add/observable/of';
 import 'rxjs-compat/add/observable/from';
 import 'rxjs-compat/add/observable/fromPromise';
 import 'rxjs-compat/add/observable/defer';
-import {AngularFireDatabaseModule} from '@angular/fire/database';
+import {AngularFireDatabaseModule, snapshotChanges} from '@angular/fire/database';
 import {Collection} from '@angular-devkit/schematics';
 import {Facture} from '../models/facture';
 import {User} from '../models/user';
+import {_document} from '@angular/platform-browser/src/browser';
 
 @Injectable()
 export class DetteService {
@@ -20,39 +21,26 @@ export class DetteService {
 
     addDette(dette: Dette): Promise<any> {
         const data = JSON.parse(JSON.stringify(dette));
-
         return this.firestore.collection<Dette>('dette').add(data);
 
     }
 
-    getDettes() {
-        return this.firestore.collection(`dette`).snapshotChanges().pipe(
-            map(result => {
-                const res = [];
-                result.forEach(
-                    detteData => {
-                        const dette = {...detteData.payload.doc.data() as Dette};
-                        res.push(dette);
-                    }
-                );
-                return res;
-            }),
-        );
+    getDettesByUser(user: User, refund: boolean) {
+        const dettes = this.firestore.collection('dette');
+        const query = dettes.ref
+            .where('users', 'array-contains', {name : 'Jeremie'})
+            .where('refund', '==', refund);
+
+        return query.get();
     }
 
-    getDettesByUser(user: User) {
-        const dettes = this.firestore.collection('dette');
-        const query = dettes.ref.where('users', 'array-contains', {name : 'Jeremie'});
+    doRefund(dette: Dette) {
 
-        return query.get().then((querySnapshot) => {
-            const res = [];
-            querySnapshot.forEach((dette) => {
-                    const d = {...dette.data() as Dette};
-                    console.log(d);
-                    res.push(d);
-                });
-            });
+        const detteQuery = this.firestore.collection('dette').doc(dette.ID);
 
+        return detteQuery.update({
+            refund: true
+        } );
     }
 
 }

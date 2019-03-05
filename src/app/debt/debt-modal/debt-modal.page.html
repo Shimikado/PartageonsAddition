@@ -13,24 +13,29 @@
     <ion-grid>
         <ion-row>
             <ion-col>
-                <app-user-bubble [user]="userQui" [active]="true"
+                <app-user-bubble [user]="dette.userWho" [active]="true"
                                  class="user"></app-user-bubble>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col>
-                doit {{montant}} à
+                doit {{dette.amount}} € à
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col>
-                <app-user-bubble [user]="userQui" [active]="true"
+                <app-user-bubble [user]="dette.userTo" [active]="true"
                                  class="user"></app-user-bubble>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col>
-               Addition: {{additions}}
+               Addition: {{dette.factures}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <ion-button (click)="doRefund(dette)">Enregistrer remboursement</ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>
