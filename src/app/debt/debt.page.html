@@ -3,10 +3,108 @@
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>debt</ion-title>
+        <ion-title>Solde entre membres</ion-title>
     </ion-toolbar>
 </ion-header>
-
 <ion-content padding>
-
+    <ion-grid>
+        <ion-row class="header-row" justify-content-between="">
+            <ion-col>Qui</ion-col>
+            <ion-col>Doit</ion-col>
+            <ion-col>A qui</ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <app-user-bubble [user]="user" [active]="false"
+                                 class="user"></app-user-bubble>
+            </ion-col>
+            <ion-col>
+                <div class="blockHead" (click)="openModalDebt();"><span class="blocktext">32.5 €</span>
+                </div>
+            </ion-col>
+            <ion-col>
+                <app-user-bubble [user]="user2" [active]="false"
+                                 class="user"></app-user-bubble>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <app-user-bubble [user]="user2" [active]="false"
+                                 class="user"></app-user-bubble>
+            </ion-col>
+            <ion-col>
+                <div class="blockHead" (click)="openModalDebt();"><span class="blocktext">15.5 €</span>
+                </div>
+            </ion-col>
+            <ion-col>
+                <app-user-bubble [user]="user" [active]="false"
+                                 class="user"></app-user-bubble>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <app-user-bubble [user]="user" [active]="false"
+                                 class="user"></app-user-bubble>
+            </ion-col>
+            <ion-col>
+                <div class="blockHead" (click)="openModalDebt();"><span class="blocktext">12.5 €</span>
+                </div>
+            </ion-col>
+            <ion-col>
+                <app-user-bubble [user]="user" [active]="false"
+                                 class="user"></app-user-bubble>
+            </ion-col>
+        </ion-row>
+        <ion-row class="end-debt">
+            <ion-col size="12">
+            </ion-col>
+        </ion-row>
+        <ion-row class="header-row">
+            <ion-col size="12">
+                Remboursements effectués
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <app-user-bubble [user]="user2" [active]="false"
+                                 class="user"></app-user-bubble>
+            </ion-col>
+            <ion-col>
+                <div class="blockHead-done" (click)="openModalDebt();"><span class="blocktext-done">32.5 €</span>
+                </div>
+            </ion-col>
+            <ion-col>
+                <app-user-bubble [user]="user" [active]="false"
+                                 class="user"></app-user-bubble>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <app-user-bubble [user]="user2" [active]="false"
+                                 class="user"></app-user-bubble>
+            </ion-col>
+            <ion-col>
+                <div class="blockHead-done" (click)="openModalDebt();"><span class="blocktext-done">15.5 €</span>
+                </div>
+            </ion-col>
+            <ion-col>
+                <app-user-bubble [user]="user" [active]="false"
+                                 class="user"></app-user-bubble>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <app-user-bubble [user]="user" [active]="false"
+                                 class="user"></app-user-bubble>
+            </ion-col>
+            <ion-col>
+                <div class="blockHead-done" (click)="openModalDebt();"><span class="blocktext-done">87.5 €</span>
+                </div>
+            </ion-col>
+            <ion-col>
+                <app-user-bubble [user]="user" [active]="false"
+                                 class="user"></app-user-bubble>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

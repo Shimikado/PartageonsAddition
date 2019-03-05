@@ -1,0 +1,68 @@
+@import "../../global.scss";
+
+.header-row {
+  border-bottom-color: $main-blue;
+  border-bottom-style: solid;
+  color: $main-blue;
+}
+
+.end-debt {
+  height: 60px;
+}
+
+.blockHead:after {
+  color: #FF7A45;
+  border-left: 17.5px solid;
+  border-top: 17.5px solid transparent;
+  border-bottom: 17.5px solid transparent;
+  display: inline-block;
+  content: '';
+  position: absolute;
+  right: -17.5px;
+  top: 0;
+}
+
+.blockHead {
+  background-color: #FF7A45;
+  height: 35px;
+  line-height: 35px;
+  display: inline-block;
+  position: relative;
+}
+
+.blocktext {
+  color: $main-blue;
+  font-weight: bold;
+  padding-left: 10px;
+  font-family: Arial;
+  font-size: 1em;
+}
+
+.blockHead-done:after {
+  color: #00C8D8;
+  border-left: 17.5px solid;
+  border-top: 17.5px solid transparent;
+  border-bottom: 17.5px solid transparent;
+  display: inline-block;
+  content: '';
+  position: absolute;
+  right: -17.5px;
+  top: 0;
+}
+
+.blockHead-done {
+  background-color: #00C8D8;
+  height: 35px;
+  line-height: 35px;
+  display: inline-block;
+  position: relative;
+}
+
+.blocktext-done {
+  color: $main-blue;
+  font-weight: bold;
+  padding-left: 10px;
+  font-family: Arial;
+  font-size: 1em;
+}
+

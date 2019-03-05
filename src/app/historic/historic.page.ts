@@ -4,6 +4,7 @@ import {Facture} from '../shared/models/facture';
 import {AuthentificationService} from '../shared/services/authentification.service';
 import {Router} from '@angular/router';
 
+
 @Component({
     selector: 'app-historic',
     templateUrl: './historic.page.html',

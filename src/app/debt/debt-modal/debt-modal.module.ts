@@ -2,18 +2,16 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {Routes, RouterModule} from '@angular/router';
-import {SharedModule} from '../shared/shared.module';
-import {DebtModalPage} from './debt-modal/debt-modal.page';
 
 import {IonicModule} from '@ionic/angular';
 
-import {DebtPage} from './debt.page';
-import {UserJoinPage} from '../list/user-join/user-join.page';
+import {DebtModalPage} from './debt-modal.page';
+import {SharedModule} from '../../shared/shared.module';
 
 const routes: Routes = [
     {
         path: '',
-        component: DebtPage
+        component: DebtModalPage
     }
 ];
 
@@ -25,8 +23,7 @@ const routes: Routes = [
         SharedModule,
         RouterModule.forChild(routes)
     ],
-    declarations: [DebtPage, DebtModalPage],
-    entryComponents: [DebtModalPage]
+    declarations: [DebtModalPage]
 })
-export class DebtPageModule {
+export class DebtModalPageModule {
 }
