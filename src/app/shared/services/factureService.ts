@@ -7,6 +7,7 @@ import 'rxjs-compat/add/observable/of';
 import 'rxjs-compat/add/observable/from';
 import 'rxjs-compat/add/observable/fromPromise';
 import 'rxjs-compat/add/observable/defer';
+import {AngularFireDatabaseModule} from '@angular/fire/database';
 
 @Injectable()
 export class FactureService {
@@ -16,19 +17,13 @@ export class FactureService {
 
     addFacture(facture: Facture): Promise<any> {
         const data = JSON.parse(JSON.stringify(facture));
-        const queries = this.firestore.collection(`factures/facture/${facture.ID}`).ref.get();
-        return queries.then((docs) => {
-            docs.forEach(
-                doc => {
-                    doc.ref.delete();
-                }
-            );
-            return this.firestore.collection(`factures/facture/${facture.ID}`)
-                .add(data);
-        });
+
+        return this.firestore.doc<Facture>('facture/' + facture.ID).set(data);
+
     }
 
     getFactures(ID: string): Observable<Facture> {
+        /*
         return this.firestore.collection<Facture>(`factures/facture/${ID}`).snapshotChanges().pipe(
             map(factures => {
                 const facture = factures[0];
@@ -38,20 +33,30 @@ export class FactureService {
                 }
                 return null;
             }),
-        );
-    }
-
-    getAllFactures(): Observable<Facture> {
-
-        return this.firestore.collection('factures').doc('facture').snapshotChanges().pipe(
-            map(factures => {
-                console.log(factures[0]);
-                const facture = factures[0];
+        );*/
+        return   this.firestore.doc<Facture>('facture/C0WS192115').snapshotChanges().pipe(
+            map(factureID => {
+                const facture = factureID;
                 if (facture) {
-                    const data = facture.payload.doc.data() as Facture;
+                    const data = facture.payload.data() as Facture;
                     return {...data};
                 }
                 return null;
+            }),
+        );
+    }
+
+    getAllFactures() {
+        return this.firestore.collection(`facture`).snapshotChanges().pipe(
+            map(result => {
+                const res = [];
+                result.forEach(
+                    factureData => {
+                        const facture = {...factureData.payload.doc.data() as Facture};
+                        res.push(facture);
+                    }
+                );
+                return res;
             }),
         );
 

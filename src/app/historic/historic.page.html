@@ -9,70 +9,13 @@
 
 
 <ion-content padding>
-    <ion-card class="light-background">
-        <ion-card-content >
-            <ion-row class="light-row" justify-content-between class="item" >
-                <div class="facture">11/04 - 11:53</div>
-                <div class="value">36.5 €</div>
+    <ion-card class="light-background" *ngFor="let facture of factures" (click)="goToFacture(facture)">
+        <ion-card-content>
+            <ion-row class="light-row" justify-content-between class="item">
+                <div class="facture">{{facture.created_date | date:'hh:mm dd/MM/yy'}}</div>
+                <div class="value">{{getSumWithDevise(facture)}}</div>
             </ion-row>
         </ion-card-content>
     </ion-card>
-    <ion-card class="light-background">
-        <ion-card-content >
-            <ion-row class="light-row" justify-content-between class="item" >
-                <div class="facture">11/04 - 11:53</div>
-                <div class="value">36.5 €</div>
-            </ion-row>
-        </ion-card-content>
-    </ion-card>
-    <ion-card class="light-background">
-        <ion-card-content >
-            <ion-row class="light-row" justify-content-between class="item" >
-                <div class="facture">11/04 - 11:53</div>
-                <div class="value">36.5 €</div>
-            </ion-row>
-        </ion-card-content>
-    </ion-card>
-    <ion-card class="light-background">
-        <ion-card-content >
-            <ion-row class="light-row" justify-content-between class="item" >
-                <div class="facture">11/04 - 11:53</div>
-                <div class="value">36.5 €</div>
-            </ion-row>
-        </ion-card-content>
-    </ion-card>
-    <ion-card class="light-background">
-        <ion-card-content >
-            <ion-row class="light-row" justify-content-between class="item" >
-                <div class="facture">11/04 - 11:53</div>
-                <div class="value">36.5 €</div>
-            </ion-row>
-        </ion-card-content>
-    </ion-card>
-    <ion-card class="light-background">
-        <ion-card-content >
-            <ion-row class="light-row" justify-content-between class="item" >
-                <div class="facture">11/04 - 11:53</div>
-                <div class="value">36.5 €</div>
-            </ion-row>
-        </ion-card-content>
-    </ion-card>
-    <ion-card class="light-background">
-        <ion-card-content >
-            <ion-row class="light-row" justify-content-between class="item" >
-                <div class="facture">11/04 - 11:53</div>
-                <div class="value">36.5 €</div>
-            </ion-row>
-        </ion-card-content>
-    </ion-card>
-    <ion-card class="light-background">
-        <ion-card-content >
-            <ion-row class="light-row" justify-content-between class="item" >
-                <div class="facture">11/04 - 11:53</div>
-                <div class="value">36.5 €</div>
-            </ion-row>
-        </ion-card-content>
-    </ion-card>
-
 </ion-content>
 
