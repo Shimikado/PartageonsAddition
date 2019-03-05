@@ -25,4 +25,12 @@ export class DashboardPage implements OnInit {
         this.router.navigateByUrl('/join');
     }
 
+    public goToHistoric() {
+        this.router.navigateByUrl('/historic');
+    }
+
+    public goToDebt() {
+        this.router.navigateByUrl('/debt');
+    }
+
 }

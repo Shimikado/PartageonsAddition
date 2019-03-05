@@ -15,6 +15,7 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import { IonicStorageModule } from '@ionic/storage';
+import {DetteService} from './shared/services/detteService';
 
 
 
@@ -35,6 +36,7 @@ import { IonicStorageModule } from '@ionic/storage';
         SplashScreen,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         FactureService,
+        DetteService,
     ],
     bootstrap: [AppComponent]
 })

@@ -13,45 +13,17 @@
             <ion-col>Doit</ion-col>
             <ion-col>A qui</ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngFor="let dette of activeDettes" >
             <ion-col>
-                <app-user-bubble [user]="user" [active]="false"
+                <app-user-bubble [user]="dette.userWho" [active]="false"
                                  class="user"></app-user-bubble>
             </ion-col>
             <ion-col>
-                <div class="blockHead" (click)="openModalDebt();"><span class="blocktext">32.5 €</span>
+                <div class="blockHead" (click)="openModalDebt(dette);"><span class="blocktext">{{dette.amount}} €</span>
                 </div>
             </ion-col>
             <ion-col>
-                <app-user-bubble [user]="user2" [active]="false"
-                                 class="user"></app-user-bubble>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <app-user-bubble [user]="user2" [active]="false"
-                                 class="user"></app-user-bubble>
-            </ion-col>
-            <ion-col>
-                <div class="blockHead" (click)="openModalDebt();"><span class="blocktext">15.5 €</span>
-                </div>
-            </ion-col>
-            <ion-col>
-                <app-user-bubble [user]="user" [active]="false"
-                                 class="user"></app-user-bubble>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <app-user-bubble [user]="user" [active]="false"
-                                 class="user"></app-user-bubble>
-            </ion-col>
-            <ion-col>
-                <div class="blockHead" (click)="openModalDebt();"><span class="blocktext">12.5 €</span>
-                </div>
-            </ion-col>
-            <ion-col>
-                <app-user-bubble [user]="user" [active]="false"
+                <app-user-bubble [user]="dette.userTo" [active]="false"
                                  class="user"></app-user-bubble>
             </ion-col>
         </ion-row>
@@ -64,47 +36,20 @@
                 Remboursements effectués
             </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngFor="let dette of refundDettes" >
             <ion-col>
-                <app-user-bubble [user]="user2" [active]="false"
+                <app-user-bubble [user]="dette.userWho" [active]="false"
                                  class="user"></app-user-bubble>
             </ion-col>
             <ion-col>
-                <div class="blockHead-done" (click)="openModalDebt();"><span class="blocktext-done">32.5 €</span>
+                <div class="blockHead-done" (click)="openModalDebt(dette);"><span class="blocktext-done">{{dette.amount}} €</span>
                 </div>
             </ion-col>
             <ion-col>
-                <app-user-bubble [user]="user" [active]="false"
+                <app-user-bubble [user]="dette.userTo" [active]="false"
                                  class="user"></app-user-bubble>
             </ion-col>
         </ion-row>
-        <ion-row>
-            <ion-col>
-                <app-user-bubble [user]="user2" [active]="false"
-                                 class="user"></app-user-bubble>
-            </ion-col>
-            <ion-col>
-                <div class="blockHead-done" (click)="openModalDebt();"><span class="blocktext-done">15.5 €</span>
-                </div>
-            </ion-col>
-            <ion-col>
-                <app-user-bubble [user]="user" [active]="false"
-                                 class="user"></app-user-bubble>
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col>
-                <app-user-bubble [user]="user" [active]="false"
-                                 class="user"></app-user-bubble>
-            </ion-col>
-            <ion-col>
-                <div class="blockHead-done" (click)="openModalDebt();"><span class="blocktext-done">87.5 €</span>
-                </div>
-            </ion-col>
-            <ion-col>
-                <app-user-bubble [user]="user" [active]="false"
-                                 class="user"></app-user-bubble>
-            </ion-col>
-        </ion-row>
+
     </ion-grid>
 </ion-content>

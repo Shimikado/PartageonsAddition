@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../../shared/models/user';
 import {ModalController} from '@ionic/angular';
+import {Dette} from '../../shared/models/dette';
+
 
 @Component({
     selector: 'app-debt-modal',
@@ -8,10 +10,7 @@ import {ModalController} from '@ionic/angular';
     styleUrls: ['./debt-modal.page.scss'],
 })
 export class DebtModalPage implements OnInit {
-    userQui: {};
-    userAQui: {};
-    montant: string;
-    additions: string;
+    dette = {} as Dette;
 
     constructor(public modalController: ModalController) {
     }
@@ -23,4 +22,9 @@ export class DebtModalPage implements OnInit {
     public close() {
         this.modalController.dismiss();
     }
+    public doRefund() {
+        this.modalController.dismiss(this.dette);
+
+    }
+
 }
