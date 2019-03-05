@@ -6,9 +6,6 @@ import {AuthentificationService} from '../shared/services/authentification.servi
 import {UserInBase} from '../shared/models/userInBase';
 import {UserJoinPage} from './user-join/user-join.page';
 import {ModalController} from '@ionic/angular';
-import {ModalItemBillPage} from '../validate-bill/modal-item-bill/modal-item-bill.page';
-import {isUndefined} from "util";
-import {Produit} from '../shared/models/produit';
 
 
 @Component({
@@ -35,31 +32,44 @@ export class ListPage implements OnInit {
                 this.user = user;
                 this.userShow = user;
                 this.activeRoute.queryParams.subscribe(data => {
-                    this.factureService.getFacturesByShortId(data['id'], new Date()).subscribe(
-                        facture => {
-                            if (!this.loading) {
-                                this.facture = facture;
-                                this.sum = 0;
-                                this.restToTake = 0;
-                                if (this.facture && this.facture.produits) {
-                                    this.facture.produits.forEach(product => {
-                                        this.restToTake += product.quantity - product.uids.length;
-                                        this.sum += product.uids.filter(uid => this.user.uid === uid).length * product.prix;
-                                    });
-                                }
-                                if (this.user && this.user.uid && this.facture && !this.facture.users.find(u => u.uid === this.user.uid)) {
-                                    this.facture.users.push(this.user);
-                                    this.factureService.addFacture(this.facture).then();
-                                }
+                    if (data['id'].length === 4) {
+                        this.factureService.getFacturesByShortId(data['id'], new Date()).subscribe(
+                            facture => {
+                                this.loadData(facture);
                             }
-                        }
-                    );
+                        );
+                    } else {
+                        this.factureService.getFactures(data['id']).subscribe(
+                            facture => {
+                                this.loadData(facture);
+                            }
+                        );
+                    }
                 });
             }
         );
     }
 
     ngOnInit() {
+    }
+
+    private loadData(facture: Facture) {
+        if (!this.loading) {
+            this.facture = facture;
+            this.sum = 0;
+            this.restToTake = 0;
+            if (this.facture && this.facture.produits) {
+                this.facture.produits.forEach(product => {
+                    this.restToTake += product.quantity - product.uids.length;
+                    this.sum += product.uids.filter(uid => this.user.uid === uid).length * product.prix;
+                });
+            }
+            if (this.user && this.user.uid && this.facture && !this.facture.users.find(u => u.uid === this.user.uid)) {
+                this.facture.users.push(this.user);
+                this.factureService.addFacture(this.facture).then();
+            }
+        }
+
     }
 
     public selectProduct(productIndex: number) {
@@ -102,7 +112,7 @@ export class ListPage implements OnInit {
     }
 
     goToResult() {
-        this.router.navigateByUrl('result?id=' + this.facture.ID.substring(0, 4));
+        this.router.navigateByUrl('result?id=' + this.facture.ID);
     }
 
     async openModalJoin() {

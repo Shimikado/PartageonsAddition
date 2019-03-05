@@ -47,6 +47,6 @@ export class HistoricPage implements OnInit {
     }
 
     public goToFacture(facture: Facture) {
-        this.router.navigateByUrl('result?id=' + facture.ID.substring(0, 4));
+        this.router.navigateByUrl('result?id=' + facture.ID);
     }
 }
