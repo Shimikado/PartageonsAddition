@@ -1,4 +1,5 @@
 @import "../../global.scss";
+
 .montant {
   padding: 0 5%;
   font-size: 1.1em;
@@ -13,5 +14,19 @@
   font-weight: bold;
   color: $main-blue;
   float: right;
+}
+
+.icon-bubble {
+  height: 35px;
+  width: 35px;
+  text-align: center;
+  background-color: white;
+  line-height: 35px;
+  border-radius: 55px;
+  z-index: 2;
+  border: 2px dashed $main-blue;
+  font-size: 1.2em;
+  margin-left: 75%;
+  margin-bottom: 10%;
 }
 

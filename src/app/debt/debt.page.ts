@@ -1,14 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {UserInBase} from '../shared/models/userInBase';
 import {User} from '../shared/models/user';
 import {Dette} from '../shared/models/dette';
 import {DebtModalPage} from './debt-modal/debt-modal.page';
 import {ModalController} from '@ionic/angular';
-import {UserJoinPage} from '../list/user-join/user-join.page';
 import {DetteService} from '../shared/services/detteService';
 import {AuthentificationService} from '../shared/services/authentification.service';
-import {isUndefined} from 'util';
-import {Produit} from '../shared/models/produit';
 
 
 @Component({
@@ -41,6 +37,15 @@ export class DebtPage implements OnInit {
         this.dette.users.push(this.user2);
         this.detteService.addDette(this.dette);
 
+        this.loadData();
+    }
+
+    ngOnInit() {
+    }
+
+    private loadData() {
+        this.activeDettes = [];
+        this.refundDettes = [];
         /* Initialisation des dettes actives */
         this.detteService.getDettesByUser(this.user, false).then((querySnapshot) => {
             querySnapshot.forEach((det) => {
@@ -63,9 +68,6 @@ export class DebtPage implements OnInit {
         });
     }
 
-    ngOnInit() {
-    }
-
     async openModalDebt(detteModal: Dette) {
         const modal = await this.modalController.create({
             component: DebtModalPage,
@@ -77,16 +79,16 @@ export class DebtPage implements OnInit {
 
         modal.onDidDismiss()
             .then((data) => {
-                if (!isUndefined(data.data)) {
+                if (data && data.data) {
                     const dette: Dette = data.data;
                     this.detteService.doRefund(dette).then(() => {
                             console.log('refund OK');
+                            this.loadData();
                             /*  TODO -> this.activeDettes.filter avec le dette.ID &  this.refundDettes.push avec dette pour MAJ de l'écran
                              */
                         }
                     );
                 }
-
             });
         return await modal.present();
     }

@@ -78,4 +78,8 @@ export class ResultPage {
     public validate() {
         this.router.navigateByUrl('historic');
     }
+
+    public addDette() {
+
+    }
 }

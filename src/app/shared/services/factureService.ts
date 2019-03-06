@@ -7,7 +7,6 @@ import 'rxjs-compat/add/observable/of';
 import 'rxjs-compat/add/observable/from';
 import 'rxjs-compat/add/observable/fromPromise';
 import 'rxjs-compat/add/observable/defer';
-import {AngularFireDatabaseModule} from '@angular/fire/database';
 
 @Injectable()
 export class FactureService {
@@ -23,18 +22,7 @@ export class FactureService {
     }
 
     getFactures(ID: string): Observable<Facture> {
-        /*
-        return this.firestore.collection<Facture>(`factures/facture/${ID}`).snapshotChanges().pipe(
-            map(factures => {
-                const facture = factures[0];
-                if (facture) {
-                    const data = facture.payload.doc.data() as Facture;
-                    return {...data};
-                }
-                return null;
-            }),
-        );*/
-        return   this.firestore.doc<Facture>('facture/C0WS192115').snapshotChanges().pipe(
+        return this.firestore.doc<Facture>('facture/' + ID).snapshotChanges().pipe(
             map(factureID => {
                 const facture = factureID;
                 if (facture) {
@@ -62,8 +50,6 @@ export class FactureService {
 
 
     }
-
-
 
 
     getFacturesByShortId(short_ID: string, date: Date): Observable<Facture> {

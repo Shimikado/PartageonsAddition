@@ -33,9 +33,9 @@
                Addition: {{dette.factures}}
             </ion-col>
         </ion-row>
-        <ion-row>
+        <ion-row *ngIf="!dette.refund">
             <ion-col>
-                <ion-button (click)="doRefund(dette)">Enregistrer remboursement</ion-button>
+                <ion-button (click)="doRefund(dette)" >Enregistrer remboursement</ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>
