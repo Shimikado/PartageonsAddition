@@ -73,7 +73,7 @@ export class ListPage implements OnInit {
     }
 
     public selectProduct(productIndex: number) {
-        if (this.user !== this.userShow) {
+        if (this.user !== this.userShow || this.facture.done) {
             return;
         }
         const updateFacture = this.facture;

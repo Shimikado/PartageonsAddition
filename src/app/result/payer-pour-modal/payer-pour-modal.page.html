@@ -1,15 +1,18 @@
 <ion-toolbar color="primary">
-  <ion-buttons slot="secondary">
-    <ion-button (click)="close();">
-      <ion-icon slot="icon-only" name="close-circle"></ion-icon>
-    </ion-button>
-  </ion-buttons>
+    <ion-buttons slot="secondary">
+        <ion-button (click)="close();">
+            <ion-icon slot="icon-only" name="close-circle"></ion-icon>
+        </ion-button>
+    </ion-buttons>
 
-  <ion-title>Payer pour</ion-title>
+    <ion-title>Payer pour</ion-title>
 </ion-toolbar>
 
 
 <ion-content padding>
-
-
+    <div *ngFor="let userElement of users" (click)="selectUser(userElement)">
+        <app-user-bubble [user]="userElement" [active]="true"
+                         *ngIf="userElement.uid !== this.user.uid"
+                         [selected]="isSelected(userElement)"></app-user-bubble>
+    </div>
 </ion-content>

@@ -34,7 +34,7 @@
 <ion-content padding class="content" *ngIf="!facture || loading">
     Loading ...
 </ion-content>
-<ion-footer no-border class ="footer-user">
+<ion-footer no-border class ="footer-user" *ngIf="facture">
     <div class="users">
         <app-user-bubble [user]="user" [active]="user.uid === userShow.uid" *ngFor="let user of facture.users"
                          (click)="seeUserData(user)" class="user"></app-user-bubble>

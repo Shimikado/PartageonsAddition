@@ -21,22 +21,25 @@ export class DebtPage implements OnInit {
 
     constructor(public modalController: ModalController, public detteService: DetteService,
                 private authService: AuthentificationService,) {
-
+        this.authService.getAuthUser().subscribe(currentUser => {
+            this.user = currentUser;
+        });
         /* TODO -> A supprimer car sera charger depuis la page payer pour */
         /* initialisation d'une dette au démarrage de la page pour pouvoir tester */
-
-        this.user.name = 'Jeremie';
-        this.user2.name = 'Benjamin';
-        this.dette.userWho = this.user;
-        this.dette.userTo = this.user2;
-        this.dette.amount = 35;
-        this.dette.createdDate = new Date();
-        this.dette.factures = [];
-        this.dette.refund = false;
-        this.dette.users = [];
-        this.dette.users.push(this.user);
-        this.dette.users.push(this.user2);
-        this.detteService.addDette(this.dette);
+        /*
+                this.user.name = 'Jeremie';
+                this.user2.name = 'Benjamin';
+                this.dette.userWho = this.user;
+                this.dette.userTo = this.user2;
+                this.dette.amount = 35;
+                this.dette.createdDate = new Date();
+                this.dette.factures = [];
+                this.dette.refund = false;
+                this.dette.users = [];
+                this.dette.users.push(this.user);
+                this.dette.users.push(this.user2);
+                this.detteService.addDette(this.dette)*/
+        ;
 
         this.loadData();
     }

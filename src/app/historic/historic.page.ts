@@ -3,6 +3,7 @@ import {FactureService} from '../shared/services/factureService';
 import {Facture} from '../shared/models/facture';
 import {AuthentificationService} from '../shared/services/authentification.service';
 import {Router} from '@angular/router';
+import {User} from '../shared/models/user';
 
 
 @Component({
@@ -12,17 +13,29 @@ import {Router} from '@angular/router';
 })
 export class HistoricPage implements OnInit {
     private factures: Facture[];
+    private user: User;
 
     constructor(private factureService: FactureService, private authService: AuthentificationService,
                 private router: Router) {
         this.authService.getAuthUser().subscribe(
             user => {
+                this.user = user;
                 if (!user) {
                     return;
                 }
-                this.factureService.getAllFactures().subscribe(factures => {
+                /*
+                this.factureService.getAllFactures(user).subscribe(factures => {
                     this.factures = factures.filter(facture => {
                         return facture.users.findIndex(userFacture => userFacture.uid === user.uid) >= 0;
+                    });
+                });
+                */
+                this.factures = [];
+                this.factureService.getAllFactures(user).then((querySnapshot) => {
+                    this.factures = [];
+                    querySnapshot.forEach((facture) => {
+                        const f = {...facture.data() as Facture};
+                        this.factures.push(f);
                     });
                 });
             }
@@ -38,7 +51,8 @@ export class HistoricPage implements OnInit {
         if (facture.produits) {
             facture.produits.forEach(
                 produit => {
-                    sum += produit.prix;
+                    const numberOfProductFound = produit.uids.filter(uid => uid === this.user.uid).length;
+                    sum += produit.prix * numberOfProductFound;
                     devise = produit.devise;
                 }
             );

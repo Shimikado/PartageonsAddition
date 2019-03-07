@@ -9,6 +9,6 @@ export interface Dette {
     amount: number;
     refund: boolean;
     refundDate: Date;
-    factures: Facture[];
+    factures: string;
     users: User[];
 }

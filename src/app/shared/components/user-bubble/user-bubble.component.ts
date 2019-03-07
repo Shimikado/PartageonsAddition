@@ -14,6 +14,9 @@ export class UserBubbleComponent implements OnInit {
     @Input()
     public active: Boolean;
 
+    @Input()
+    public selected = true;
+
     constructor() {
     }
 
