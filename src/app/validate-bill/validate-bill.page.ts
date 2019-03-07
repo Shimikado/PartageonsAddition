@@ -77,11 +77,11 @@ export class ValidateBillPage implements OnInit {
         const facture: Facture = new class implements Facture {
             ID: string;
             created_date: Date;
-            done: string;
+            done: boolean;
             produits: Produit[];
             users: UserInBase[];
         };
-        facture.done = 'false';
+        facture.done = false;
         facture.produits = produits;
         facture.users = [this.user];
         facture.created_date = new Date();

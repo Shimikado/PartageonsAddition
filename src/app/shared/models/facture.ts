@@ -5,6 +5,6 @@ export interface Facture {
     ID: string;
     created_date: Date;
     users: UserInBase[];
-    done: string;
+    done: boolean;
     produits: Produit[];
 }

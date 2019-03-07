@@ -24,6 +24,7 @@ export class DebtPage implements OnInit {
 
         /* TODO -> A supprimer car sera charger depuis la page payer pour */
         /* initialisation d'une dette au démarrage de la page pour pouvoir tester */
+
         this.user.name = 'Jeremie';
         this.user2.name = 'Benjamin';
         this.dette.userWho = this.user;

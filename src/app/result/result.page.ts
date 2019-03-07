@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {FactureService} from '../shared/services/factureService';
 import {AuthentificationService} from '../shared/services/authentification.service';
 import {Facture} from '../shared/models/facture';
-
+import {ToastController} from '@ionic/angular';
 
 @Component({
     selector: 'app-result',
@@ -20,7 +20,7 @@ export class ResultPage {
 
     constructor(private activeRoute: ActivatedRoute, protected factureService: FactureService,
                 private router: Router, private authService: AuthentificationService,
-                private cd: ChangeDetectorRef) {
+                private cd: ChangeDetectorRef, public toastController: ToastController) {
 
 
         this.activeRoute.queryParams.subscribe(data => {
@@ -75,8 +75,23 @@ export class ResultPage {
         this.router.navigateByUrl('list?id=' + this.facture.ID);
     }
 
-    public validate() {
-        this.router.navigateByUrl('historic');
+    async validate() {
+        const toastUpdateOK = await this.toastController.create({
+            message: 'Addition enregistrée',
+            duration: 2000,
+            position: 'top'
+        });
+        const toastUpdateKO = await this.toastController.create({
+            message: 'Problème durant la mise à jour de l addition',
+            duration: 2000,
+            position: 'top'
+        });
+        this.factureService.setFactureAsDone(this.facture.ID).then(() => {
+            toastUpdateOK.present();
+            this.router.navigateByUrl('historic');
+            }
+        );
+
     }
 
     public addDette() {

@@ -7,6 +7,7 @@ import 'rxjs-compat/add/observable/of';
 import 'rxjs-compat/add/observable/from';
 import 'rxjs-compat/add/observable/fromPromise';
 import 'rxjs-compat/add/observable/defer';
+import {Dette} from '../models/dette';
 
 @Injectable()
 export class FactureService {
@@ -66,6 +67,15 @@ export class FactureService {
         }
 
         return text;
+    }
+
+    setFactureAsDone(ID: string) {
+
+        const factureQuery = this.firestore.collection('facture').doc(ID);
+
+        return factureQuery.update({
+            done: true
+        } );
     }
 
     public generateId(): string {
