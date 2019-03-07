@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from '../../shared/models/user';
 import {ModalController} from '@ionic/angular';
 import {Dette} from '../../shared/models/dette';
 
@@ -22,6 +21,7 @@ export class DebtModalPage implements OnInit {
     public close() {
         this.modalController.dismiss();
     }
+
     public doRefund() {
         this.modalController.dismiss(this.dette);
 
