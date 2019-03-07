@@ -4,6 +4,10 @@ import {FactureService} from '../shared/services/factureService';
 import {AuthentificationService} from '../shared/services/authentification.service';
 import {Facture} from '../shared/models/facture';
 import {ToastController} from '@ionic/angular';
+import {PayerPourModalPage} from './payer-pour-modal/payer-pour-modal.page';
+import {ModalController} from '@ionic/angular';
+import {Dette} from '../shared/models/dette';
+import {DebtModalPage} from '../debt/debt-modal/debt-modal.page';
 
 @Component({
     selector: 'app-result',
@@ -20,7 +24,7 @@ export class ResultPage {
 
     constructor(private activeRoute: ActivatedRoute, protected factureService: FactureService,
                 private router: Router, private authService: AuthentificationService,
-                private cd: ChangeDetectorRef, public toastController: ToastController) {
+                private cd: ChangeDetectorRef, public toastController: ToastController, public modalController: ModalController,)  {
 
 
         this.activeRoute.queryParams.subscribe(data => {
@@ -92,6 +96,21 @@ export class ResultPage {
             }
         );
 
+    }
+
+    async openModalPayerPour() {
+        const modal = await this.modalController.create({
+            component: PayerPourModalPage,
+            componentProps: {
+            },
+            cssClass: 'wideModal'
+        });
+
+        modal.onDidDismiss()
+            .then((data) => {
+                console.log(data);
+            });
+        return await modal.present();
     }
 
     public addDette() {
