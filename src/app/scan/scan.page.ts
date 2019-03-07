@@ -26,6 +26,8 @@ export class ScanPage implements OnInit {
             + window.location.hostname
             + (window.location.port ? ':' + window.location.port : '')
             + '/';
+
+        // Utilisation de la librairie TESSERACT: http://tesseract.projectnaptha.com/ pour la détection de caractères
         this.tesseract = Tesseract.create({
             workerPath: host + 'assets/lib/worker.js',
             langPath: host + 'assets/lib/',
@@ -40,6 +42,7 @@ export class ScanPage implements OnInit {
         };
     }
 
+    // Source de l'image de l'addition
     async selectSource() {
         const actionSheet = await this.actionSheetCtrl.create({
             buttons: [
@@ -54,6 +57,7 @@ export class ScanPage implements OnInit {
                         this.goToBill(this.camera.PictureSourceType.CAMERA);
                     }
                 }, {
+                    // Utilisé pour nos tests, chargement d'une addition prédéfinie
                     text: 'Mock',
                     handler: async () => {
                         this.mockValue();

@@ -13,27 +13,31 @@
 <ion-content padding>
 
     <ion-grid>
-        <ion-row *ngFor="let userPrice of users_prices; let i = index;">
+        <ion-row *ngFor="let userPrice of users_prices">
             <ion-col size="8">
                 <app-user-bubble [user]="userPrice.user" [active]="true"
                                  class="user"></app-user-bubble>
+                <app-user-bubble *ngFor="let userDebt of userPrice.debts_user"
+                                 [user]="userDebt.user" [active]="true"
+                                 class="user user_debt"></app-user-bubble>
             </ion-col>
             <ion-col size="4">
             </ion-col>
             <ion-col size="6">
             </ion-col>
             <ion-col size="6">
-                <div class="user-bubble" (click)="addDette(userPrice)">
+                <div class="user-bubble" (click)="openModalPayerPour(userPrice)"
+                     *ngIf="facture && user && !facture.done && userPrice.user.uid === user.uid">
                     <div class="icon-bubble">+</div>
                 </div>
-                <div class="montant">Total: {{userPrice.price}} {{userPrice.devise}}</div>
+                <div class="montant">Total: {{getSum(userPrice)}} €</div>
             </ion-col>
             <ion-item-divider></ion-item-divider>
         </ion-row>
 
         <ion-row>
             <ion-col size="12">
-                <div class="montantTotal">Montant Total: {{montantFacture}} {{users_prices[0].devise}}</div>
+                <div class="montantTotal">Montant Total: {{montantFacture}} €</div>
             </ion-col>
         </ion-row>
     </ion-grid>
@@ -44,7 +48,7 @@
     <ion-toolbar color="secondary" class="footer">
         <ion-row justify-content-between="">
             <ion-button large end (click)="goToUpdate()">Détail addition</ion-button>
-            <ion-button large end (click)="validate()">Paiement</ion-button>
+            <ion-button large end (click)="validate()" *ngIf="facture && !facture.done">Paiement</ion-button>
         </ion-row>
 
     </ion-toolbar>

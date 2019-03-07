@@ -1,17 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
 import {Dette} from '../models/dette';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {map} from 'rxjs/operators';
 import 'rxjs-compat/add/observable/of';
 import 'rxjs-compat/add/observable/from';
 import 'rxjs-compat/add/observable/fromPromise';
 import 'rxjs-compat/add/observable/defer';
-import {AngularFireDatabaseModule, snapshotChanges} from '@angular/fire/database';
-import {Collection} from '@angular-devkit/schematics';
-import {Facture} from '../models/facture';
 import {User} from '../models/user';
-import {_document} from '@angular/platform-browser/src/browser';
 
 @Injectable()
 export class DetteService {
@@ -28,8 +22,16 @@ export class DetteService {
     getDettesByUser(user: User, refund: boolean) {
         const dettes = this.firestore.collection('dette');
         const query = dettes.ref
-            .where('users', 'array-contains', {name : 'Jeremie'})
+            .where('users', 'array-contains', user)
             .where('refund', '==', refund);
+
+        return query.get();
+    }
+
+    getDettesByFactureID(factureId: string) {
+        const dettes = this.firestore.collection('dette');
+        const query = dettes.ref
+            .where('factures', '==', factureId);
 
         return query.get();
     }
@@ -40,7 +42,7 @@ export class DetteService {
 
         return detteQuery.update({
             refund: true
-        } );
+        });
     }
 
 }

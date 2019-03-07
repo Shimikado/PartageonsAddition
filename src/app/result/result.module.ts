@@ -6,6 +6,9 @@ import {SharedModule} from '../shared/shared.module';
 import {IonicModule} from '@ionic/angular';
 
 import {ResultPage} from './result.page';
+import {PayerPourModalPage} from './payer-pour-modal/payer-pour-modal.page';
+
+
 
 const routes: Routes = [
     {
@@ -22,7 +25,8 @@ const routes: Routes = [
         IonicModule,
         RouterModule.forChild(routes)
     ],
-    declarations: [ResultPage]
+    declarations: [ResultPage, PayerPourModalPage],
+    entryComponents: [PayerPourModalPage]
 })
 export class ResultPageModule {
 }

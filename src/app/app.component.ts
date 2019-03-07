@@ -62,5 +62,8 @@ export class AppComponent {
             messagingSenderId: '389644409346'
         };
         // firebase.initializeApp(configFirebase);
+        // firebase.firestore().settings( { timestampsInSnapshots: true });
+
+
     }
 }

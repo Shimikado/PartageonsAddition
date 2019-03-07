@@ -7,6 +7,7 @@ import 'rxjs-compat/add/observable/of';
 import 'rxjs-compat/add/observable/from';
 import 'rxjs-compat/add/observable/fromPromise';
 import 'rxjs-compat/add/observable/defer';
+import {Dette} from '../models/dette';
 
 @Injectable()
 export class FactureService {
@@ -34,22 +35,14 @@ export class FactureService {
         );
     }
 
-    getAllFactures() {
-        return this.firestore.collection(`facture`).snapshotChanges().pipe(
-            map(result => {
-                const res = [];
-                result.forEach(
-                    factureData => {
-                        const facture = {...factureData.payload.doc.data() as Facture};
-                        res.push(facture);
-                    }
-                );
-                return res;
-            }),
-        );
+    getAllFactures(user: any) {
+        const factures = this.firestore.collection('facture');
+        const query = factures.ref
+            .where('users', 'array-contains', user);
 
-
+        return query.get();
     }
+
 
 
     getFacturesByShortId(short_ID: string, date: Date): Observable<Facture> {
@@ -66,6 +59,15 @@ export class FactureService {
         }
 
         return text;
+    }
+
+    setFactureAsDone(ID: string) {
+
+        const factureQuery = this.firestore.collection('facture').doc(ID);
+
+        return factureQuery.update({
+            done: true
+        } );
     }
 
     public generateId(): string {
