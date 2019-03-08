@@ -1,4 +1,4 @@
 <div class="user-bubble" [ngClass]="{'mini-width': !active}">
     <div class="icon-bubble" *ngIf="user && user.name && user.name.length>0">{{user.name[0]}}</div>
-    <div class="user-label" [ngClass]="{'selected':!selected}" *ngIf="active && user && user.name ">{{user.name}}</div>
+    <div class="user-label" [ngClass]="{'selected':!selected}" [ngClass]="{'little':little}" *ngIf="active && user && user.name ">{{user.name}}</div>
 </div>

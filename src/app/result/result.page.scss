@@ -18,7 +18,26 @@
 
 .user_debt{
   float: right;
+  margin-right: 10%;
 }
+
+.montant-payerpour{
+  float: right;
+  margin-top: 12px;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: $main-blue;
+  margin-right: 50px;
+}
+
+.label-payerpour{
+  margin-top: 12px;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: $main-blue;
+  float: left;
+}
+
 
 .icon-bubble {
   height: 35px;

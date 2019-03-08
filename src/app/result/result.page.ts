@@ -129,8 +129,8 @@ export class ResultPage {
             position: 'top'
         });
         this.factureService.setFactureAsDone(this.facture.ID).then(() => {
-                toastUpdateOK.present();
                 this.addDette();
+                toastUpdateOK.present();
                 this.router.navigateByUrl('historic');
             }
         );

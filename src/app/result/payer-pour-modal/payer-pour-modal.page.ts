@@ -30,7 +30,7 @@ export class PayerPourModalPage implements OnInit {
         return this.usersSelected.findIndex(u => u.uid === userElement.uid) >= 0;
     }
 
-    public close() {
+    public validateSelection() {
         let result = this.users;
         this.user.debts_user = [];
         if (this.usersSelected.length > 0) {
@@ -46,6 +46,10 @@ export class PayerPourModalPage implements OnInit {
             );
         }
         this.modalController.dismiss(result);
+    }
+
+    public close() {
+        this.modalController.dismiss();
     }
 
 

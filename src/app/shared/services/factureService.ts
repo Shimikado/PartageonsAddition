@@ -38,12 +38,11 @@ export class FactureService {
     getAllFactures(user: any) {
         const factures = this.firestore.collection('facture');
         const query = factures.ref
-            .where('users', 'array-contains', user);
+            .where('users', 'array-contains', user)
+            .orderBy('created_date', 'desc');
 
         return query.get();
     }
-
-
 
     getFacturesByShortId(short_ID: string, date: Date): Observable<Facture> {
         return this.getFactures(this.getIdFromNow(short_ID));

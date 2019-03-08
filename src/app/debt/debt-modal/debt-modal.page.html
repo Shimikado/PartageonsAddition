@@ -30,12 +30,18 @@
         </ion-row>
         <ion-row>
             <ion-col>
-               Addition: {{dette.factures}}
+               Addition:
+            </ion-col>
+        </ion-row>
+
+        <ion-row>
+            <ion-col>
+               <ion-button (click)="goToFacture(dette.factures)" >{{dette.factures}}</ion-button>
             </ion-col>
         </ion-row>
         <ion-row *ngIf="!dette.refund">
             <ion-col>
-                <ion-button (click)="doRefund(dette)" >Enregistrer remboursement</ion-button>
+                <ion-button (click)="doRefund(dette)" >DETTE REMBOURSEE</ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>

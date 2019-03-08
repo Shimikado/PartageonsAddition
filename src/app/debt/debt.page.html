@@ -15,16 +15,20 @@
         </ion-row>
         <ion-row *ngFor="let dette of activeDettes" >
             <ion-col>
-                <app-user-bubble [user]="dette.userWho" [active]="false"
-                                 class="user"></app-user-bubble>
+                <div class="user-bubble-little" classe="mini-width">
+                    <div class="icon-bubble-little">{{dette.userWho.name[0]}}</div>
+                    <div class="user-label-little" >{{dette.userWho.name}}</div>
+                </div>
             </ion-col>
             <ion-col>
                 <div class="blockHead" (click)="openModalDebt(dette);"><span class="blocktext">{{dette.amount}} €</span>
                 </div>
             </ion-col>
             <ion-col>
-                <app-user-bubble [user]="dette.userTo" [active]="false"
-                                 class="user"></app-user-bubble>
+                <div class="user-bubble-little" classe="mini-width">
+                    <div class="icon-bubble-little">{{dette.userTo.name[0]}}</div>
+                    <div class="user-label-little" >{{dette.userTo.name}}</div>
+                </div>
             </ion-col>
         </ion-row>
         <ion-row class="end-debt">
@@ -38,16 +42,20 @@
         </ion-row>
         <ion-row *ngFor="let dette of refundDettes" >
             <ion-col>
-                <app-user-bubble [user]="dette.userWho" [active]="false"
-                                 class="user"></app-user-bubble>
+                <div class="user-bubble-little" classe="mini-width">
+                    <div class="icon-bubble-little">{{dette.userWho.name[0]}}</div>
+                    <div class="user-label-little" >{{dette.userWho.name}}</div>
+                </div>
             </ion-col>
             <ion-col>
                 <div class="blockHead-done" (click)="openModalDebt(dette);"><span class="blocktext-done">{{dette.amount}} €</span>
                 </div>
             </ion-col>
             <ion-col>
-                <app-user-bubble [user]="dette.userTo" [active]="false"
-                                 class="user"></app-user-bubble>
+                <div class="user-bubble-little" classe="mini-width">
+                    <div class="icon-bubble-little">{{dette.userTo.name[0]}}</div>
+                    <div class="user-label-little" >{{dette.userTo.name}}</div>
+                </div>
             </ion-col>
         </ion-row>
 

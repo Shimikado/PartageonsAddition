@@ -17,18 +17,21 @@
             <ion-col size="8">
                 <app-user-bubble [user]="userPrice.user" [active]="true"
                                  class="user"></app-user-bubble>
-                <app-user-bubble *ngFor="let userDebt of userPrice.debts_user"
-                                 [user]="userDebt.user" [active]="true"
-                                 class="user user_debt"></app-user-bubble>
             </ion-col>
             <ion-col size="4">
             </ion-col>
+            <ion-col size="12" *ngFor="let userDebt of userPrice.debts_user">
+                <div class="montant-payerpour">Dette de {{userDebt.amount}} €</div><app-user-bubble
+                                 [user]="userDebt.user" [active]="true"
+                                 class="user user_debt"></app-user-bubble>
+            </ion-col>
+
             <ion-col size="6">
             </ion-col>
             <ion-col size="6">
                 <div class="user-bubble" (click)="openModalPayerPour(userPrice)"
                      *ngIf="facture && user && !facture.done && userPrice.user.uid === user.uid">
-                    <div class="icon-bubble">+</div>
+                    <div class="label-payerpour">Payer pour: </div><div class="icon-bubble">+</div>
                 </div>
                 <div class="montant">Total: {{getSum(userPrice)}} €</div>
             </ion-col>

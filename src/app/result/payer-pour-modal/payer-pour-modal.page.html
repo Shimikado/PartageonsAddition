@@ -15,4 +15,5 @@
                          *ngIf="userElement.uid !== this.user.uid"
                          [selected]="isSelected(userElement)"></app-user-bubble>
     </div>
+    <ion-button large end (click)="validateSelection()">Confirmer</ion-button>
 </ion-content>
