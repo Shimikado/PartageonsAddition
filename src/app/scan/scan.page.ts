@@ -42,7 +42,9 @@ export class ScanPage {
         };
     }
 
-    // Source de l'image de l'addition
+    /**
+     * Select Image Source
+     */
     async selectSource() {
         const actionSheet = await this.actionSheetCtrl.create({
             buttons: [
@@ -113,7 +115,8 @@ export class ScanPage {
         const imageTest = this.selectedImage;
         this.imageText = 'Step 2';
         this.tesseract.recognize(imageTest, this.tesseractConfig)
-            .progress((v) => this.imageText = v.status)
+        //  .progress((v) => this.imageText = v.status) ===>  v.status = status technique tesseract
+            .progress((v) => this.imageText = 'Analyse en cours, veillez patienter')
             .catch((e) => this.imageText = 'Erreur : ' + e)
             .then(
                 recognizedText => {
