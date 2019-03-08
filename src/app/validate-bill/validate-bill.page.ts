@@ -9,7 +9,6 @@ import {ModalItemBillPage} from './modal-item-bill/modal-item-bill.page';
 import {AuthentificationService} from '../shared/services/authentification.service';
 import {UserInBase} from '../shared/models/userInBase';
 import {AlertController} from '@ionic/angular';
-import {isNull, isUndefined} from 'util';
 
 
 @Component({
@@ -17,7 +16,7 @@ import {isNull, isUndefined} from 'util';
     templateUrl: './validate-bill.page.html',
     styleUrls: ['./validate-bill.page.scss'],
 })
-export class ValidateBillPage implements OnInit {
+export class ValidateBillPage {
 
     public listItem: Produit[];
     private inputText: string;
@@ -45,9 +44,9 @@ export class ValidateBillPage implements OnInit {
         );
     }
 
-    ngOnInit() {
-    }
-
+    /**
+     * Permet d'interpreter un texte en facture
+     */
     private billParser() {
         this.listItem = [];
         const currentList = this.inputText.match(/[0-9]+[a-zA-Z ]+[0-9 ]+[\., ]*[0-9 ]*€/g);
@@ -71,6 +70,9 @@ export class ValidateBillPage implements OnInit {
         this.calculateTotalAmount();
     }
 
+    /**
+     * Enregistre une facture et passe a l'etape suivante
+     */
     public validate() {
         // On doit save la facture pour la rendre accessible à tous et envoyer l'id dans la page suivante
         const produits = this.listItem;
@@ -91,6 +93,9 @@ export class ValidateBillPage implements OnInit {
         });
     }
 
+    /**
+     * Ouvre une modal pour ajouter un element
+     */
     async openModalAdd() {
         const modal = await this.modalController.create({
             component: ModalItemBillPage,
@@ -100,7 +105,7 @@ export class ValidateBillPage implements OnInit {
 
         modal.onDidDismiss()
             .then((data) => {
-                if (!isUndefined(data.data)) {
+                if (data.data) {
                     const produit: Produit = data.data;
                     this.listItem.push(produit);
                     this.calculateTotalAmount();
@@ -110,6 +115,10 @@ export class ValidateBillPage implements OnInit {
         return await modal.present();
     }
 
+    /**
+     * Ouvre une modal pour editer un element
+     * @param i
+     */
     async openModalUpdate(i) {
         const modal = await this.modalController.create({
             component: ModalItemBillPage,
@@ -121,7 +130,7 @@ export class ValidateBillPage implements OnInit {
         });
         modal.onDidDismiss()
             .then((data) => {
-                if (!isUndefined(data.data)) {
+                if (data.data) {
                     const produit: Produit = data.data;
                     this.listItem[i].prix = produit.prix;
                     this.listItem[i].quantity = produit.quantity;
@@ -132,6 +141,10 @@ export class ValidateBillPage implements OnInit {
         return await modal.present();
     }
 
+    /**
+     * Ouvre une modal pour verifier la suppression d'un element
+     * @param i
+     */
     async presentAlertConfirm(i) {
         const alert = await this.alertController.create({
             header: 'Suppression',
@@ -157,6 +170,10 @@ export class ValidateBillPage implements OnInit {
 
     }
 
+    /**
+     * Affiche ou non le bouton en parametre
+     * @param i
+     */
     public diplayActionButtons(i) {
         const name = 'actionButtons-' + i;
         if (document.getElementById(name).style.visibility === 'hidden') {
@@ -167,6 +184,9 @@ export class ValidateBillPage implements OnInit {
 
     }
 
+    /**
+     * Calcule de montant total
+     */
     public calculateTotalAmount() {
         let amount = 0;
         for (let i = 0; i < this.listItem.length; i++) {
