@@ -13,11 +13,10 @@ import {ModalController} from '@ionic/angular';
     templateUrl: 'list.page.html',
     styleUrls: ['list.page.scss']
 })
-export class ListPage implements OnInit {
+export class ListPage {
     public facture: Facture;
     public user: any;
     public userShow: any;
-    private REFRESH_TIMER = 2000;
     public loading = false;
     public sum = 0;
     public restToTake = 0;
@@ -50,9 +49,6 @@ export class ListPage implements OnInit {
         );
     }
 
-    ngOnInit() {
-    }
-
     private loadData(facture: Facture) {
         if (!this.loading) {
             this.facture = facture;
@@ -72,6 +68,10 @@ export class ListPage implements OnInit {
 
     }
 
+    /**
+     * Permet d'attribuer une quantite d'un produit a un utilisateur ou de l'enlever
+     * @param productIndex
+     */
     public selectProduct(productIndex: number) {
         if (this.user !== this.userShow || this.facture.done) {
             return;
@@ -104,6 +104,10 @@ export class ListPage implements OnInit {
         );
     }
 
+    /**
+     * Permet de detecter quel user est celui connecte
+     * @param user
+     */
     seeUserData(user: UserInBase) {
         this.userShow = user;
         if (user.uid === this.user.uid) {
@@ -111,10 +115,16 @@ export class ListPage implements OnInit {
         }
     }
 
+    /**
+     * Passe a l'etape suivante
+     */
     goToResult() {
         this.router.navigateByUrl('result?id=' + this.facture.ID);
     }
 
+    /**
+     * Ouvre une modal permetant de diffuser l'id de la facture
+     */
     async openModalJoin() {
         const modal = await this.modalController.create({
             component: UserJoinPage,
