@@ -12,7 +12,7 @@
 <ion-content padding class="content">
     <ng-progress [min]="0" [max]="1"></ng-progress>
 
-    <img id="image" #image [src]="selectedImage" *ngIf="selectedImage" (load)="recognizeImage()">
+    <img id="image" #image [src]="selectedImage" *ngIf="selectedImage && selectedImage.length > 0" (load)="recognizeImage()">
 
     <ion-card *ngIf="imageText">
         <ion-card-content>

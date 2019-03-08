@@ -88,7 +88,7 @@ export class ScanPage implements OnInit {
 
     async goToBill(source) {
         await this.camera.getPicture({
-            quality: 100,
+            quality: 75,
             destinationType: this.camera.DestinationType.DATA_URL,
             allowEdit: true,
             saveToPhotoAlbum: false,
