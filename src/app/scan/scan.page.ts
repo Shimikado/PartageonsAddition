@@ -116,7 +116,7 @@ export class ScanPage {
         this.imageText = 'Step 2';
         this.tesseract.recognize(imageTest, this.tesseractConfig)
         //  .progress((v) => this.imageText = v.status) ===>  v.status = status technique tesseract
-            .progress((v) => this.imageText = 'Analyse en cours, veillez patienter')
+            .progress((v) => this.imageText = 'Analyse en cours, veuillez patienter')
             .catch((e) => this.imageText = 'Erreur : ' + e)
             .then(
                 recognizedText => {
