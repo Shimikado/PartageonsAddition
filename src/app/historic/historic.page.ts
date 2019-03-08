@@ -11,7 +11,7 @@ import {User} from '../shared/models/user';
     templateUrl: './historic.page.html',
     styleUrls: ['./historic.page.scss'],
 })
-export class HistoricPage implements OnInit {
+export class HistoricPage {
     private factures: Facture[];
     private user: User;
 
@@ -35,9 +35,10 @@ export class HistoricPage implements OnInit {
         );
     }
 
-    ngOnInit() {
-    }
-
+    /**
+     * Recupere une somme et une devise a afficher
+     * @param facture
+     */
     public getSumWithDevise(facture: Facture): string {
         let sum = 0;
         let devise = '€';
@@ -53,6 +54,10 @@ export class HistoricPage implements OnInit {
         return sum + ' ' + devise;
     }
 
+    /**
+     * Passe a la page resultat
+     * @param facture
+     */
     public goToFacture(facture: Facture) {
         this.router.navigateByUrl('result?id=' + facture.ID);
     }
