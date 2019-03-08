@@ -12,7 +12,7 @@ import {AuthentificationService} from '../shared/services/authentification.servi
     templateUrl: './debt.page.html',
     styleUrls: ['./debt.page.scss'],
 })
-export class DebtPage implements OnInit {
+export class DebtPage {
     user = {} as User;
     user2 = {} as User;
     dette = {} as Dette;
@@ -25,9 +25,6 @@ export class DebtPage implements OnInit {
             this.user = currentUser;
         });
         this.loadData();
-    }
-
-    ngOnInit() {
     }
 
     private loadData() {
@@ -55,6 +52,10 @@ export class DebtPage implements OnInit {
         });
     }
 
+    /**
+     * Ouvre une modal pour assigner une dette
+     * @param detteModal
+     */
     async openModalDebt(detteModal: Dette) {
         const modal = await this.modalController.create({
             component: DebtModalPage,
