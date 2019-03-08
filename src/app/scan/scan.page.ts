@@ -10,7 +10,7 @@ import {ActionSheetController} from '@ionic/angular';
     templateUrl: './scan.page.html',
     styleUrls: ['./scan.page.scss'],
 })
-export class ScanPage implements OnInit {
+export class ScanPage {
 
     selectedImage: string;
     imageText = 'Prenez une photo !';
@@ -86,6 +86,10 @@ export class ScanPage implements OnInit {
         this.scanDone = true;
     }
 
+    /**
+     * Load and display image from source
+     * @param source
+     */
     async goToBill(source) {
         await this.camera.getPicture({
             quality: 75,
@@ -102,6 +106,9 @@ export class ScanPage implements OnInit {
         });
     }
 
+    /**
+     * Recognize text on displayed image
+     */
     recognizeImage() {
         const imageTest = this.selectedImage;
         this.imageText = 'Step 2';
@@ -116,11 +123,11 @@ export class ScanPage implements OnInit {
             );
     }
 
+    /**
+     * Go to next step
+     */
     validate() {
         this.router.navigateByUrl(`validate-bill?inputText=${this.imageText}`);
-    }
-
-    ngOnInit(): void {
     }
 
 }

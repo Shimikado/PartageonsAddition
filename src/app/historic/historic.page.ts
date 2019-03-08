@@ -23,13 +23,6 @@ export class HistoricPage implements OnInit {
                 if (!user) {
                     return;
                 }
-                /*
-                this.factureService.getAllFactures(user).subscribe(factures => {
-                    this.factures = factures.filter(facture => {
-                        return facture.users.findIndex(userFacture => userFacture.uid === user.uid) >= 0;
-                    });
-                });
-                */
                 this.factures = [];
                 this.factureService.getAllFactures(user).then((querySnapshot) => {
                     this.factures = [];
