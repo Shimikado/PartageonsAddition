@@ -35,7 +35,6 @@ export class ResultPage {
                     facture => {
                         this.facture = facture;
                         this.loadData(facture);
-                        console.log(this.users_prices);
                     });
 
             } else {
@@ -43,7 +42,6 @@ export class ResultPage {
                     facture => {
                         this.facture = facture;
                         this.loadData(facture);
-                        console.log(this.users_prices);
                     });
             }
 
@@ -149,7 +147,9 @@ export class ResultPage {
 
         modal.onDidDismiss()
             .then((data) => {
-                this.users_prices = data.data;
+                if (data.data) {
+                    this.users_prices = data.data;
+                }
             });
         return await modal.present();
     }
