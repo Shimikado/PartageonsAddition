@@ -21,7 +21,10 @@ export class HomePage {
                 public toastController: ToastController) {
     }
 
-
+    /**
+     * Connecte une utilisateur
+     * @param user
+     */
     async login(user: User) {
         let messageToast = '';
         try {
@@ -45,12 +48,15 @@ export class HomePage {
                 position: 'top'
             });
             toastEmail.present();
-        }
-        catch (e) {
+        } catch (e) {
             console.error(e);
         }
     }
 
+    /**
+     * Genere un mot de passe
+     * @param user
+     */
     async generatePassword(user: User) {
         let messageToast = '';
         try {
@@ -69,12 +75,15 @@ export class HomePage {
             });
             toastEmail.present();
 
-        }
-        catch (e) {
+        } catch (e) {
             console.error(e);
         }
     }
 
+    /**
+     * Redirige vers un enregistrement
+     * @param user
+     */
     async register(user: User) {
         try {
             this.router.navigateByUrl('/register');
