@@ -8,7 +8,7 @@ import {FactureService} from '../shared/services/factureService';
     templateUrl: './join.page.html',
     styleUrls: ['./join.page.scss'],
 })
-export class JoinPage implements OnInit {
+export class JoinPage {
 
     idBill: string;
     item_form: FormGroup;
@@ -23,13 +23,9 @@ export class JoinPage implements OnInit {
         });
     }
 
-    ngOnInit() {
-    }
-
-    validate() {
-        console.log('change');
-    }
-
+    /**
+     * Permet de rejoindre une facture
+     */
     joinBill() {
         if (this.item_form && this.item_form.valid) {
             const now = new Date();
