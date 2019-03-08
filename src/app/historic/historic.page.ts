@@ -23,6 +23,7 @@ export class HistoricPage {
                 if (!user) {
                     return;
                 }
+
                 this.factures = [];
                 this.factureService.getAllFactures(user).then((querySnapshot) => {
                     this.factures = [];
