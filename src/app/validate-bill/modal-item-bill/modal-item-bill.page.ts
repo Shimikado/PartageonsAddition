@@ -11,7 +11,7 @@ import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms'
   styleUrls: ['./modal-item-bill.page.scss'],
 })
 export class ModalItemBillPage implements OnInit {
-  produit = {} as Produit;
+  produit = {devise: '€', uids: []} as Produit;
   action: string;
 
   item_form: FormGroup;
