@@ -49,6 +49,9 @@ export class ResultPage {
     }
 
     private loadData(facture: Facture) {
+        this.users_prices.forEach(userPrice => {
+            userPrice.price = 0;
+        });
         facture.produits.forEach(produit => {
                 produit.uids.forEach(uid => {
                     let user_found_index: number = this.users_prices.findIndex(u => u.uid === uid);
@@ -91,6 +94,7 @@ export class ResultPage {
             );
             this.users_prices = result;
         });
+        this.cd.markForCheck();
     }
 
     public getUserName(uid: string): string {
