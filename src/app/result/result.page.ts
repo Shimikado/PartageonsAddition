@@ -176,4 +176,22 @@ export class ResultPage {
             }
         });
     }
+
+    public removeDebt(userPrice, userDebt) {
+        if (this.facture.done) {
+            return;
+        }
+        const indexUser = this.users_prices.findIndex(u => u.uid === userPrice.uid);
+        if (indexUser >= 0) {
+            this.users_prices[indexUser].debts_user = this.users_prices[indexUser].debts_user.filter(u => u.uid !== userDebt.uid);
+            this.users_prices.push({
+                user: this.getUser(userDebt.uid),
+                uid: userDebt.uid,
+                name: this.getUserName(userDebt.uid),
+                price: userDebt.price,
+                debts_user: []
+            });
+            this.cd.markForCheck();
+        }
+    }
 }

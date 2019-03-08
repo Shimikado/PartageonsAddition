@@ -32,7 +32,6 @@ export class PayerPourModalPage implements OnInit {
 
     public validateSelection() {
         let result = this.users;
-        this.user.debts_user = [];
         if (this.usersSelected.length > 0) {
             this.users.forEach(
                 user_element => {
