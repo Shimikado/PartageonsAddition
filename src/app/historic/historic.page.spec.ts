@@ -3,20 +3,28 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {HistoricPage} from './historic.page';
 import {FactureService} from '../shared/services/factureService';
+import {AngularFirestore} from '@angular/fire/firestore';
+import {RouterTestingModule} from '@angular/router/testing';
+import {IonicStorageModule} from '@ionic/storage';
 
 describe('HistoricPage', () => {
     let component: HistoricPage;
     let fixture: ComponentFixture<HistoricPage>;
     let factureServiceSpy;
+    let angularFirestoreSpy;
 
     beforeEach(async(() => {
         factureServiceSpy = {};
+        angularFirestoreSpy = {};
         TestBed.configureTestingModule({
             declarations: [HistoricPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             providers: [
                 {provide: FactureService, useValue: factureServiceSpy},
+                {provide: AngularFirestore, useValue: angularFirestoreSpy},
             ],
+            imports: [RouterTestingModule.withRoutes([]),
+                IonicStorageModule.forRoot()],
         })
             .compileComponents();
     }));

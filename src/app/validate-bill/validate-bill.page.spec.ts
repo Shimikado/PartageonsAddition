@@ -1,4 +1,4 @@
-import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ValidateBillPage} from './validate-bill.page';
@@ -23,7 +23,7 @@ describe('ValidateBillPage', () => {
         alertControllerSpy = {};
         TestBed.configureTestingModule({
             declarations: [ValidateBillPage],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            schemas: [NO_ERRORS_SCHEMA],
             providers: [
                 {provide: ModalController, useValue: modalControllerSpy},
                 {provide: FactureService, useValue: factureServiceSpy},

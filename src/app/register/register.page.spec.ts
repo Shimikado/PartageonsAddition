@@ -7,6 +7,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {RouterTestingModule} from '@angular/router/testing';
 import {IonicStorageModule} from '@ionic/storage';
 import {ToastController} from '@ionic/angular';
+import {User} from '../shared/models/user';
 
 describe('RegisterPage', () => {
     let component: RegisterPage;
@@ -33,6 +34,7 @@ describe('RegisterPage', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(RegisterPage);
         component = fixture.componentInstance;
+        component.user = {name: '', email: '', password: ''} as User;
         fixture.detectChanges();
     });
 

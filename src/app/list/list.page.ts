@@ -31,7 +31,7 @@ export class ListPage {
                 this.user = user;
                 this.userShow = user;
                 this.activeRoute.queryParams.subscribe(data => {
-                    if (data['id'].length === 4) {
+                    if (data && data['id'].length === 4) {
                         this.factureService.getFacturesByShortId(data['id'], new Date()).subscribe(
                             facture => {
                                 this.loadData(facture);
