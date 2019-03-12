@@ -36,3 +36,9 @@ UserInterfaceState.xcuserstate
 package-lock\.json
 
 \.firebase/
+
+\.scannerwork/
+
+sonar-scanner-3\.3\.0\.1492-windows/
+
+sonarqube-7\.6/
