@@ -165,8 +165,8 @@ export class ResultPage {
                     const dette = {
                         amount: userDebt.price,
                         createdDate: new Date(),
-                        userWho: userPrice.user,
-                        userTo: userDebt.user,
+                        userWho: userDebt.user,
+                        userTo: userPrice.user,
                         refund: false,
                         factures: this.facture.ID,
                         users: [userPrice.user, userDebt.user],
