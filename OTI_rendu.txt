@@ -1,0 +1,47 @@
+Retour d'experience :
+
+===
+Tests Unitaires
+===
+
+La mise en place des tests unitaires fut plutot difficile dans un premier temps, du point de vue de la configuration
+necessaire pour leurs bon fonctionnement sur la technologie Ionic utilisée.
+
+En effet, Karma, le système utilisé pour les tests unitaires sur ce projet, fut plutot capricieux avec les dependances
+necessaires pour notre projet.
+
+Cependant, une fois les tests lancés, on comprenait rapidement les failles de notre architecture, et cela nous a
+permis de rectifier en plein developpement notre application, afin d'etablir une architecture plus maline.
+
+La notion des fonctions a tester fut assez flou pour nous, nous ne savons pas encore reellement quoi tester, et si
+il est permet de le tester. Nous avons donc fait uniquement des tests de "surface" qui nous permet de savoir si un
+composant peut exister sans aucune erreur, en fonction de quelque parametre potentiellement, instancé en tant que Mock.
+
+A ce stade, tout les tests unitaires fonctionnent, mais pas ensemble. C'est à dire que chaque test lancé independemment
+fonctionne, mais la suite de test ne fonctionne pas encore ( elle remet en erreur entre 1 et 3 tests, qui en sont jamais
+les memes). La complexite de l'erreur ne nous a pas encore permis d'identifier precisemment le probleme.
+
+=====
+SONAR
+=====
+
+La mise en place de sonar fut une experience plutot desagreable dans un premier temps.
+En effet, la configuration initiale pour mettre en place sonar, sur notre projet codé en Ionic, fut plutot difficile.
+La technologie etant encore très recente, il fut difficile de trouver une documentation complete et fiable sur le sujet.
+
+Cependant, une fois le serveur installé et lancé, ainsi que le scanner mis a execution, le retour sur investissement est
+immediat. Il suffit d'exclure les fichiers a ne pas analyser ( comme la banque de donnee utilisee dans notre application )
+et les resultats sont exploitables directement.
+
+Bien que les statistiques ne soit pas encore parfaites, elles permettent tout de meme d'identifier rapidement les
+lacunes sur notre projet. Les points de qualité que nous sommes en mesure d'ameliorer semble alors plus clair,
+et permettent de mieux comprendre pourquoi certains bugs peuvent arriver par exemple.
+
+===
+SONAR avec les Tests Unitaires
+===
+
+Bien que les tests unitaires fonctionnent, il nous est encore impossible de lancer un coverage de notre code pour le
+moment. La technologie Ionic 4 necessite des dependances communes avec Karma, ce qui provoque des conflits lors du lancement
+des tests, et rend donc ,pour le moment et selon nos connaissances actuelles, impossible de lancer un coverage sur notre
+projet et donc d'afficher la couverture de code sur Sonar.
