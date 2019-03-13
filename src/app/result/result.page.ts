@@ -1,12 +1,12 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FactureService} from '../shared/services/factureService';
+import {BillService} from '../shared/services/bill.service';
 import {AuthentificationService} from '../shared/services/authentification.service';
-import {Facture} from '../shared/models/facture';
+import {Bill} from '../shared/models/bill';
 import {ModalController, ToastController} from '@ionic/angular';
 import {PayerPourModalPage} from './payer-pour-modal/payer-pour-modal.page';
-import {DetteService} from '../shared/services/detteService';
-import {Dette} from '../shared/models/dette';
+import {DebtService} from '../shared/services/debt.service';
+import {Debt} from '../shared/models/debt';
 
 @Component({
     selector: 'app-result',
@@ -16,43 +16,43 @@ import {Dette} from '../shared/models/dette';
 export class ResultPage {
     public user: any;
     public userShow: any;
-    public facture: any;
-    public montantFacture = 0;
+    public bill: any;
+    public billAmount = 0;
     public users_prices = [];
 
 
-    constructor(private activeRoute: ActivatedRoute, protected factureService: FactureService,
+    constructor(private activeRoute: ActivatedRoute, protected billService: BillService,
                 private router: Router, private authService: AuthentificationService,
                 private cd: ChangeDetectorRef, public toastController: ToastController, public modalController: ModalController,
-                private detteService: DetteService) {
+                private debtService: DebtService) {
         this.authService.getAuthUser().subscribe(currentUser => {
             this.user = currentUser;
         });
 
         this.activeRoute.queryParams.subscribe(data => {
             if (data['id'].length === 4) {
-                this.factureService.getFacturesByShortId(data['id'], new Date()).subscribe(
-                    facture => {
-                        this.facture = facture;
-                        this.loadData(facture);
+                this.billService.getBillsByShortId(data['id'], new Date()).subscribe(
+                    bill => {
+                        this.bill = bill;
+                        this.loadData(bill);
                     });
 
             } else {
-                this.factureService.getFactures(data['id']).subscribe(
-                    facture => {
-                        this.facture = facture;
-                        this.loadData(facture);
+                this.billService.getBills(data['id']).subscribe(
+                    bill => {
+                        this.bill = bill;
+                        this.loadData(bill);
                     });
             }
 
         });
     }
 
-    private loadData(facture: Facture) {
+    private loadData(bill: Bill) {
         this.users_prices.forEach(userPrice => {
             userPrice.price = 0;
         });
-        facture.produits.forEach(produit => {
+        bill.products.forEach(produit => {
                 produit.uids.forEach(uid => {
                     let user_found_index: number = this.users_prices.findIndex(u => u.uid === uid);
                     if (user_found_index < 0) {
@@ -61,17 +61,17 @@ export class ResultPage {
                     }
 
                     this.users_prices[user_found_index].price += produit.prix;
-                    this.montantFacture += produit.prix;
+                    this.billAmount += produit.prix;
                     if (!this.users_prices[user_found_index].devise) {
                         this.users_prices[user_found_index].devise = produit.devise;
                     }
                 });
             }
         );
-        this.detteService.getDettesByFactureID(this.facture.ID).then(querySnapshot => {
+        this.debtService.getDebtsByFactureID(this.bill.ID).then(querySnapshot => {
             const dettes = [];
             querySnapshot.forEach((det) => {
-                const d = {...det.data() as Dette};
+                const d = {...det.data() as Debt};
                 dettes.push(d);
             });
             let result = this.users_prices;
@@ -98,15 +98,15 @@ export class ResultPage {
     }
 
     public getUserName(uid: string): string {
-        return this.facture.users.find(u => u.uid === uid).name;
+        return this.bill.users.find(u => u.uid === uid).name;
     }
 
     public getUser(uid: string): string {
-        return this.facture.users.find(u => u.uid === uid);
+        return this.bill.users.find(u => u.uid === uid);
     }
 
     public goToUpdate() {
-        this.router.navigateByUrl('list?id=' + this.facture.ID);
+        this.router.navigateByUrl('list?id=' + this.bill.ID);
     }
 
     public getSum(userPrice: any): number {
@@ -130,7 +130,7 @@ export class ResultPage {
             duration: 2000,
             position: 'top'
         });
-        this.factureService.setFactureAsDone(this.facture.ID).then(() => {
+        this.billService.setBillAsDone(this.bill.ID).then(() => {
                 this.addDette();
                 toastUpdateOK.present();
                 this.router.navigateByUrl('historic');
@@ -168,17 +168,17 @@ export class ResultPage {
                         userWho: userDebt.user,
                         userTo: userPrice.user,
                         refund: false,
-                        factures: this.facture.ID,
+                        factures: this.bill.ID,
                         users: [userPrice.user, userDebt.user],
-                    } as Dette;
-                    this.detteService.addDette(dette);
+                    } as Debt;
+                    this.debtService.addDebt(dette);
                 });
             }
         });
     }
 
     public removeDebt(userPrice, userDebt) {
-        if (this.facture.done) {
+        if (this.bill.done) {
             return;
         }
         const indexUser = this.users_prices.findIndex(u => u.uid === userPrice.uid);

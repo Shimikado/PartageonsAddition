@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 
 const routes: Routes = [
     {
@@ -23,15 +23,13 @@ const routes: Routes = [
     {path: 'bill', loadChildren: './bill/bill.module#BillPageModule'},
     {path: 'validate-bill', loadChildren: './validate-bill/validate-bill.module#ValidateBillPageModule'},
     {path: 'register', loadChildren: './register/register.module#RegisterPageModule'},
-  { path: 'result', loadChildren: './result/result.module#ResultPageModule' },
-  { path: 'payer-pour-modal', loadChildren: './result/payer-pour-modal/payer-pour-modal.module#PayerPourModalPageModule' },
- /* { path: 'payer-pour-modal', loadChildren: './result/payer-pour-modal/payer-pour-modal.module#PayerPourModalPageModule' },*/
+    {path: 'result', loadChildren: './result/result.module#ResultPageModule'},
+    // {path: 'payer-pour-modal', loadChildren: './result/payer-pour-modal/payer-pour-modal.module#PayerPourModalPageModule'},
+    /* { path: 'payer-pour-modal', loadChildren: './result/payer-pour-modal/payer-pour-modal.module#PayerPourModalPageModule' },*/
 
-/*    { path: 'ModalItemBill', loadChildren: './validate-bill/modal-item-bill/modal-item-bill.module#ModalItemBillPageModule' },
-  { path: 'user-join', loadChildren: './list/user-join/user-join.module#UserJoinPageModule' },
-  { path: 'debt-modal', loadChildren: './debt/debt-modal/debt-modal.module#DebtModalPageModule' },*/
-
-
+    /*    { path: 'ModalItemBill', loadChildren: './validate-bill/modal-item-bill/modal-item-bill.module#ModalItemBillPageModule' },
+      { path: 'user-join', loadChildren: './list/user-join/user-join.module#UserJoinPageModule' },
+      { path: 'debt-modal', loadChildren: './debt/debt-modal/debt-modal.module#DebtModalPageModule' },*/
 
 
 ];

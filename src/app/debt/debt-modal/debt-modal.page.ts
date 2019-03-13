@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
-import {Dette} from '../../shared/models/dette';
+import {Debt} from '../../shared/models/debt';
 import {Router} from '@angular/router';
 
 
@@ -10,9 +10,9 @@ import {Router} from '@angular/router';
     styleUrls: ['./debt-modal.page.scss'],
 })
 export class DebtModalPage implements OnInit {
-    dette = {} as Dette;
+    debt = {} as Debt;
 
-    constructor(public modalController: ModalController, private router: Router,) {
+    constructor(public modalController: ModalController, private router: Router) {
     }
 
     ngOnInit() {
@@ -24,13 +24,13 @@ export class DebtModalPage implements OnInit {
     }
 
     public doRefund() {
-        this.modalController.dismiss(this.dette);
+        this.modalController.dismiss(this.debt);
 
     }
 
-    public goToFacture(facture: string) {
+    public goToBill(bill: string) {
         this.modalController.dismiss();
-        this.router.navigateByUrl('result?id=' + facture);
+        this.router.navigateByUrl('result?id=' + bill);
     }
 
 }

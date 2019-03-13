@@ -1,33 +1,32 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {Facture} from '../models/facture';
+import {Bill} from '../models/bill';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {map} from 'rxjs/operators';
 import 'rxjs-compat/add/observable/of';
 import 'rxjs-compat/add/observable/from';
 import 'rxjs-compat/add/observable/fromPromise';
 import 'rxjs-compat/add/observable/defer';
-import {Dette} from '../models/dette';
 
 @Injectable()
-export class FactureService {
+export class BillService {
 
     constructor(private firestore: AngularFirestore) {
     }
 
-    addFacture(facture: Facture): Promise<any> {
-        const data = JSON.parse(JSON.stringify(facture));
+    addBill(bill: Bill): Promise<any> {
+        const data = JSON.parse(JSON.stringify(bill));
 
-        return this.firestore.doc<Facture>('facture/' + facture.ID).set(data);
+        return this.firestore.doc<Bill>('bill/' + bill.ID).set(data);
 
     }
 
-    getFactures(ID: string): Observable<Facture> {
-        return this.firestore.doc<Facture>('facture/' + ID).snapshotChanges().pipe(
-            map(factureID => {
-                const facture = factureID;
-                if (facture) {
-                    const data = facture.payload.data() as Facture;
+    getBills(ID: string): Observable<Bill> {
+        return this.firestore.doc<Bill>('bill/' + ID).snapshotChanges().pipe(
+            map(billId => {
+                const bill = billId;
+                if (bill) {
+                    const data = bill.payload.data() as Bill;
                     return {...data};
                 }
                 return null;
@@ -35,23 +34,23 @@ export class FactureService {
         );
     }
 
-    getAllFactures(user: any) {
-        const factures = this.firestore.collection('facture');
-        const query = factures.ref
+    getAllBills(user: any) {
+        const bills = this.firestore.collection('bill');
+        const query = bills.ref
             .where('users', 'array-contains', user)
             .orderBy('created_date', 'desc');
 
         return query.get();
     }
 
-    getFacturesByShortId(short_ID: string, date: Date): Observable<Facture> {
-        return this.getFactures(this.getIdFromNow(short_ID));
+    getBillsByShortId(short_ID: string, date: Date): Observable<Bill> {
+        return this.getBills(this.getIdFromNow(short_ID));
     }
 
     private stringGen(len: number) {
         let text = '';
 
-        const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        const charset = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
 
         for (let i = 0; i < len; i++) {
             text += charset.charAt(Math.floor(Math.random() * charset.length));
@@ -60,11 +59,11 @@ export class FactureService {
         return text;
     }
 
-    setFactureAsDone(ID: string) {
+    setBillAsDone(ID: string) {
 
-        const factureQuery = this.firestore.collection('facture').doc(ID);
+        const billQuery = this.firestore.collection('bill').doc(ID);
 
-        return factureQuery.update({
+        return billQuery.update({
             done: true
         } );
     }

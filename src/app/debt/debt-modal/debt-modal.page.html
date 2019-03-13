@@ -13,18 +13,18 @@
     <ion-grid>
         <ion-row>
             <ion-col>
-                <app-user-bubble [user]="dette.userWho" [active]="true"
+                <app-user-bubble [user]="debt.userWho" [active]="true"
                                  class="user"></app-user-bubble>
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col>
-                doit {{dette.amount}} € à
+                doit {{debt.amount}} € à
             </ion-col>
         </ion-row>
         <ion-row>
             <ion-col>
-                <app-user-bubble [user]="dette.userTo" [active]="true"
+                <app-user-bubble [user]="debt.userTo" [active]="true"
                                  class="user"></app-user-bubble>
             </ion-col>
         </ion-row>
@@ -36,12 +36,12 @@
 
         <ion-row>
             <ion-col>
-               <ion-button (click)="goToFacture(dette.factures)" >{{dette.factures}}</ion-button>
+               <ion-button (click)="goToBill(debt.factures)" >{{debt.factures}}</ion-button>
             </ion-col>
         </ion-row>
-        <ion-row *ngIf="!dette.refund">
+        <ion-row *ngIf="!debt.refund">
             <ion-col>
-                <ion-button (click)="doRefund(dette)" >DETTE REMBOURSEE</ion-button>
+                <ion-button (click)="doRefund(debt)" >DETTE REMBOURSEE</ion-button>
             </ion-col>
         </ion-row>
     </ion-grid>

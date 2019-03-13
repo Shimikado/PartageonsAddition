@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Dette} from '../models/dette';
+import {Debt} from '../models/debt';
 import {AngularFirestore} from '@angular/fire/firestore';
 import 'rxjs-compat/add/observable/of';
 import 'rxjs-compat/add/observable/from';
@@ -8,39 +8,38 @@ import 'rxjs-compat/add/observable/defer';
 import {User} from '../models/user';
 
 @Injectable()
-export class DetteService {
+export class DebtService {
 
     constructor(private firestore: AngularFirestore) {
     }
 
-    addDette(dette: Dette): Promise<any> {
-        const data = JSON.parse(JSON.stringify(dette));
-        return this.firestore.collection<Dette>('dette').add(data);
+    addDebt(debt: Debt): Promise<any> {
+        const data = JSON.parse(JSON.stringify(debt));
+        return this.firestore.collection<Debt>('debt').add(data);
 
     }
 
-    getDettesByUser(user: User, refund: boolean) {
-        const dettes = this.firestore.collection('dette');
-        const query = dettes.ref
+    getDebtsByUser(user: User, refund: boolean) {
+        const debts = this.firestore.collection('debt');
+        const query = debts.ref
             .where('users', 'array-contains', user)
             .where('refund', '==', refund);
 
         return query.get();
     }
 
-    getDettesByFactureID(factureId: string) {
-        const dettes = this.firestore.collection('dette');
-        const query = dettes.ref
+    getDebtsByFactureID(factureId: string) {
+        const debts = this.firestore.collection('debt');
+        const query = debts.ref
             .where('factures', '==', factureId);
 
         return query.get();
     }
 
-    doRefund(dette: Dette) {
+    doRefund(dette: Debt) {
+        const debtQuery = this.firestore.collection('debt').doc(dette.ID);
 
-        const detteQuery = this.firestore.collection('dette').doc(dette.ID);
-
-        return detteQuery.update({
+        return debtQuery.update({
             refund: true
         });
     }

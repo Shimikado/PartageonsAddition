@@ -5,7 +5,7 @@ import {ValidateBillPage} from './validate-bill.page';
 import {AlertController, ModalController} from '@ionic/angular';
 import {RouterTestingModule} from '@angular/router/testing';
 import {IonicStorageModule} from '@ionic/storage';
-import {FactureService} from '../shared/services/factureService';
+import {BillService} from '../shared/services/bill.service';
 import {AngularFirestore} from '@angular/fire/firestore';
 
 describe('ValidateBillPage', () => {
@@ -26,7 +26,7 @@ describe('ValidateBillPage', () => {
             schemas: [NO_ERRORS_SCHEMA],
             providers: [
                 {provide: ModalController, useValue: modalControllerSpy},
-                {provide: FactureService, useValue: factureServiceSpy},
+                {provide: BillService, useValue: factureServiceSpy},
                 {provide: AngularFirestore, useValue: angularFirestoreSpy},
                 {provide: AlertController, useValue: alertControllerSpy},
             ],

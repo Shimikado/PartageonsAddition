@@ -20,7 +20,7 @@
             </ion-col>
             <ion-col size="6">
                 <div class="user-bubble" (click)="openModalPayerPour(userPrice)"
-                     *ngIf="facture && user && !facture.done && userPrice.user.uid === user.uid
+                     *ngIf="bill && user && !bill.done && userPrice.user.uid === user.uid
                      && users_prices.length > 1">
                     <div class="label-payerpour">Payer pour:</div>
                     <div class="icon-bubble">+</div>
@@ -38,7 +38,7 @@
 
         <ion-row>
             <ion-col size="12">
-                <div class="montantTotal">Montant Total: {{montantFacture}} €</div>
+                <div class="montantTotal">Montant Total: {{billAmount}} €</div>
             </ion-col>
         </ion-row>
     </ion-grid>
@@ -49,7 +49,7 @@
     <ion-toolbar color="secondary" class="footer">
         <ion-row justify-content-between="">
             <ion-button large end (click)="goToUpdate()">Détail addition</ion-button>
-            <ion-button large end (click)="validate()" *ngIf="facture && !facture.done">Paiement</ion-button>
+            <ion-button large end (click)="validate()" *ngIf="bill && !bill.done">Paiement</ion-button>
         </ion-row>
 
     </ion-toolbar>

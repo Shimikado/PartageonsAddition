@@ -13,21 +13,21 @@
             <ion-col>Doit</ion-col>
             <ion-col>A qui</ion-col>
         </ion-row>
-        <ion-row *ngFor="let dette of activeDettes" >
+        <ion-row *ngFor="let dette of activeDebts" >
             <ion-col>
                 <div class="user-bubble-little" classe="mini-width">
-                    <div class="icon-bubble-little">{{dette.userWho.name[0]}}</div>
-                    <div class="user-label-little" >{{dette.userWho.name}}</div>
+                    <div class="icon-bubble-little">{{debt.userWho.name[0]}}</div>
+                    <div class="user-label-little" >{{debt.userWho.name}}</div>
                 </div>
             </ion-col>
             <ion-col>
-                <div class="blockHead" (click)="openModalDebt(dette);"><span class="blocktext">{{dette.amount}} €</span>
+                <div class="blockHead" (click)="openModalDebt(debt);"><span class="blocktext">{{debt.amount}} €</span>
                 </div>
             </ion-col>
             <ion-col>
                 <div class="user-bubble-little" classe="mini-width">
-                    <div class="icon-bubble-little">{{dette.userTo.name[0]}}</div>
-                    <div class="user-label-little" >{{dette.userTo.name}}</div>
+                    <div class="icon-bubble-little">{{debt.userTo.name[0]}}</div>
+                    <div class="user-label-little" >{{debt.userTo.name}}</div>
                 </div>
             </ion-col>
         </ion-row>
@@ -40,21 +40,21 @@
                 Remboursements effectués
             </ion-col>
         </ion-row>
-        <ion-row *ngFor="let dette of refundDettes" >
+        <ion-row *ngFor="let dette of refundDebts" >
             <ion-col>
                 <div class="user-bubble-little" classe="mini-width">
-                    <div class="icon-bubble-little">{{dette.userWho.name[0]}}</div>
-                    <div class="user-label-little" >{{dette.userWho.name}}</div>
+                    <div class="icon-bubble-little">{{debt.userWho.name[0]}}</div>
+                    <div class="user-label-little" >{{debt.userWho.name}}</div>
                 </div>
             </ion-col>
             <ion-col>
-                <div class="blockHead-done" (click)="openModalDebt(dette);"><span class="blocktext-done">{{dette.amount}} €</span>
+                <div class="blockHead-done" (click)="openModalDebt(debt);"><span class="blocktext-done">{{debt.amount}} €</span>
                 </div>
             </ion-col>
             <ion-col>
                 <div class="user-bubble-little" classe="mini-width">
-                    <div class="icon-bubble-little">{{dette.userTo.name[0]}}</div>
-                    <div class="user-label-little" >{{dette.userTo.name}}</div>
+                    <div class="icon-bubble-little">{{debt.userTo.name[0]}}</div>
+                    <div class="user-label-little" >{{debt.userTo.name}}</div>
                 </div>
             </ion-col>
         </ion-row>

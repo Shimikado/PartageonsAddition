@@ -1,7 +1,6 @@
-import {Facture} from './facture';
 import {User} from './user';
 
-export interface Dette {
+export interface Debt {
     ID: string;
     createdDate: Date;
     userWho: User;

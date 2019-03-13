@@ -9,11 +9,11 @@
 
 
 <ion-content padding>
-    <ion-card class="light-background" *ngFor="let facture of factures" (click)="goToFacture(facture)">
-        <ion-card-content [ngClass]="{'done':facture.done, 'active':!facture.done}">
+    <ion-card class="light-background" *ngFor="let bill of bills" (click)="goToBill(bill)">
+        <ion-card-content [ngClass]="{'done':bill.done, 'active':!bill.done}">
             <ion-row class="light-row" justify-content-between class="item">
-                <div class="facture">{{facture.created_date | date:'hh:mm dd/MM/yy'}}</div>
-                <div class="value">{{getSumWithDevise(facture)}}</div>
+                <div class="facture">{{bill.created_date | date:'hh:mm dd/MM/yy'}}</div>
+                <div class="value">{{getSumWithDevise(bill)}}</div>
             </ion-row>
         </ion-card-content>
     </ion-card>

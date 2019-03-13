@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {User} from '../models/user';
-import {Facture} from '../models/facture';
+import {Bill} from '../models/bill';
 import {map} from 'rxjs/operators';
 import {AngularFirestore} from '@angular/fire/firestore';
 import { Storage } from '@ionic/storage';

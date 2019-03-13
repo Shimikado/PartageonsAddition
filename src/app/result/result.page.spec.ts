@@ -3,12 +3,12 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
 import {ResultPage} from './result.page';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FactureService} from '../shared/services/factureService';
+import {BillService} from '../shared/services/bill.service';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {RouterTestingModule} from '@angular/router/testing';
 import {IonicStorageModule} from '@ionic/storage';
 import {ModalController, ToastController} from '@ionic/angular';
-import {DetteService} from '../shared/services/detteService';
+import {DebtService} from '../shared/services/debt.service';
 import {of} from 'rxjs';
 
 describe('ResultPage', () => {
@@ -45,12 +45,12 @@ describe('ResultPage', () => {
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             providers: [
                 {provide: ActivatedRoute, useValue: activatedRouteSpy},
-                {provide: FactureService, useValue: factureServiceSpy},
+                {provide: BillService, useValue: factureServiceSpy},
                 {provide: Router, useValue: routerSpy},
                 {provide: AngularFirestore, useValue: angularFirestoreSpy},
                 {provide: ToastController, useValue: toastControllerSpy},
                 {provide: ModalController, useValue: modalControllerSpy},
-                {provide: DetteService, useValue: detteServiceSpy},
+                {provide: DebtService, useValue: detteServiceSpy},
             ],
             imports: [RouterTestingModule.withRoutes([]),
                 IonicStorageModule.forRoot()],

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {FactureService} from '../shared/services/factureService';
+import {BillService} from '../shared/services/bill.service';
 import {ToastController} from '@ionic/angular';
 
 @Component({
@@ -19,14 +19,14 @@ export class JoinPage {
         public formBuilder: FormBuilder,
         public toastController: ToastController,
         private router: Router,
-        private factureService: FactureService) {
+        private billService: BillService) {
         this.item_form = this.formBuilder.group({
             idBill: new FormControl(this.idBill, Validators.required),
         });
     }
 
     /**
-     * Permet de rejoindre une facture
+     * Permet de rejoindre une bill
      */
     async joinBill() {
         const toastErreur = await this.toastController.create({
@@ -37,10 +37,10 @@ export class JoinPage {
         if (this.item_form && this.item_form.valid) {
             const now = new Date();
             this.isValid = false;
-            const f = this.factureService.getFacturesByShortId(this.idBill.toUpperCase(), now).subscribe(
-                (facture) => {
+            const f = this.billService.getBillsByShortId(this.idBill.toUpperCase(), now).subscribe(
+                (bill) => {
                     // Join possible si l'addition n'est pas déjà terminée
-                    if (facture && facture.done === false) {
+                    if (bill && bill.done === false) {
                         this.isValid = true;
                         this.router.navigateByUrl('list?id=' + this.idBill.toUpperCase());
                     } else {

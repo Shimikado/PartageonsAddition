@@ -10,12 +10,12 @@ import {AppComponent} from './app.component';
 import {AppRoutingModule} from './app-routing.module';
 
 import {environment} from '../environments/environment';
-import {FactureService} from './shared/services/factureService';
+import {BillService} from './shared/services/bill.service';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireDatabaseModule} from '@angular/fire/database';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import { IonicStorageModule } from '@ionic/storage';
-import {DetteService} from './shared/services/detteService';
+import {DebtService} from './shared/services/debt.service';
 
 
 
@@ -35,8 +35,8 @@ import {DetteService} from './shared/services/detteService';
         StatusBar,
         SplashScreen,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
-        FactureService,
-        DetteService,
+        BillService,
+        DebtService,
     ],
     bootstrap: [AppComponent]
 })

@@ -1,4 +1,4 @@
-export interface Produit {
+export interface Product {
     label: string;
     prix: number;
     devise: string;

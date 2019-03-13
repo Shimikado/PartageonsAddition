@@ -5,7 +5,7 @@ import {JoinPage} from './join.page';
 import {FormBuilder} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {IonicStorageModule} from '@ionic/storage';
-import {FactureService} from '../shared/services/factureService';
+import {BillService} from '../shared/services/bill.service';
 import {ToastController} from '@ionic/angular';
 
 describe('JoinPage', () => {
@@ -28,7 +28,7 @@ describe('JoinPage', () => {
             schemas: [NO_ERRORS_SCHEMA],
             providers: [
                 {provide: FormBuilder, useValue: formBuilderSpy},
-                {provide: FactureService, useValue: factureServiceSpy},
+                {provide: BillService, useValue: factureServiceSpy},
                 {provide: ToastController, useValue: toastControllerSpy},
             ],
             imports: [RouterTestingModule.withRoutes([]),

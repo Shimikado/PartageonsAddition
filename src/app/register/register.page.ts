@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router} from '@angular/router';
 import {User} from '../shared/models/user';
 import {AngularFireAuth} from '@angular/fire/auth';
@@ -41,13 +41,13 @@ export class RegisterPage {
                     (success) => {
                         success.user.updateProfile({
                             displayName: user.name,
-                            photoURL: ""
+                            photoURL: ''
                         }).catch(
                             (err) => {
                                 console.log(err);
                             });
                         toastLogin.present();
-                        this.router.navigate(['/home'])
+                        this.router.navigate(['/home']);
                     }).catch(
                     (err) => {
                         console.log(err);

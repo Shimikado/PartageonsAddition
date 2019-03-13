@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FactureService} from '../shared/services/factureService';
-import {Facture} from '../shared/models/facture';
+import {BillService} from '../shared/services/bill.service';
+import {Bill} from '../shared/models/bill';
 import {AuthentificationService} from '../shared/services/authentification.service';
 import {Router} from '@angular/router';
 import {User} from '../shared/models/user';
@@ -12,10 +12,10 @@ import {User} from '../shared/models/user';
     styleUrls: ['./historic.page.scss'],
 })
 export class HistoricPage {
-    private factures: Facture[];
+    private bills: Bill[];
     private user: User;
 
-    constructor(private factureService: FactureService, private authService: AuthentificationService,
+    constructor(private billService: BillService, private authService: AuthentificationService,
                 private router: Router) {
         this.authService.getAuthUser().subscribe(
             user => {
@@ -24,12 +24,12 @@ export class HistoricPage {
                     return;
                 }
 
-                this.factures = [];
-                this.factureService.getAllFactures(user).then((querySnapshot) => {
-                    this.factures = [];
-                    querySnapshot.forEach((facture) => {
-                        const f = {...facture.data() as Facture};
-                        this.factures.push(f);
+                this.bills = [];
+                this.billService.getAllBills(user).then((querySnapshot) => {
+                    this.bills = [];
+                    querySnapshot.forEach((bill) => {
+                        const f = {...bill.data() as Bill};
+                        this.bills.push(f);
                     });
                 });
             }
@@ -38,13 +38,13 @@ export class HistoricPage {
 
     /**
      * Recupere une somme et une devise a afficher
-     * @param facture
+     * @param bill
      */
-    public getSumWithDevise(facture: Facture): string {
+    public getSumWithDevise(bill: Bill): string {
         let sum = 0;
         let devise = '€';
-        if (facture.produits) {
-            facture.produits.forEach(
+        if (bill.products) {
+            bill.products.forEach(
                 produit => {
                     const numberOfProductFound = produit.uids.filter(uid => uid === this.user.uid).length;
                     sum += produit.prix * numberOfProductFound;
@@ -57,9 +57,9 @@ export class HistoricPage {
 
     /**
      * Passe a la page resultat
-     * @param facture
+     * @param bill
      */
-    public goToFacture(facture: Facture) {
-        this.router.navigateByUrl('result?id=' + facture.ID);
+    public goToBill(bill: Bill) {
+        this.router.navigateByUrl('result?id=' + bill.ID);
     }
 }

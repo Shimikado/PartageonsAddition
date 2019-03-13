@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import {Produit} from '../../shared/models/produit';
+import {Product} from '../../shared/models/product';
 import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 
@@ -11,7 +11,7 @@ import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms'
   styleUrls: ['./modal-item-bill.page.scss'],
 })
 export class ModalItemBillPage implements OnInit {
-  produit = {devise: '€', uids: []} as Produit;
+  produit = {devise: '€', uids: []} as Product;
   action: string;
 
   item_form: FormGroup;

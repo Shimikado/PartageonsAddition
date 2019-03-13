@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FactureService} from '../shared/services/factureService';
-import {Facture} from '../shared/models/facture';
+import {BillService} from '../shared/services/bill.service';
+import {Bill} from '../shared/models/bill';
 import {AuthentificationService} from '../shared/services/authentification.service';
 import {UserInBase} from '../shared/models/userInBase';
 import {UserJoinPage} from './user-join/user-join.page';
@@ -14,7 +14,7 @@ import {ModalController} from '@ionic/angular';
     styleUrls: ['list.page.scss']
 })
 export class ListPage {
-    public facture: Facture;
+    public bill: Bill;
     public user: any;
     public userShow: any;
     public loading = false;
@@ -22,25 +22,25 @@ export class ListPage {
     public restToTake = 0;
 
     // On doit recuperer la liste grâce à l'id provenant de validate bill
-    constructor(public modalController: ModalController, private activeRoute: ActivatedRoute, protected factureService: FactureService,
+    constructor(public modalController: ModalController, private activeRoute: ActivatedRoute, protected billService: BillService,
                 private router: Router, private authService: AuthentificationService,
                 private cd: ChangeDetectorRef) {
-        this.factureService = factureService;
+        this.billService = billService;
         this.authService.getAuthUser().subscribe(
             user => {
                 this.user = user;
                 this.userShow = user;
                 this.activeRoute.queryParams.subscribe(data => {
                     if (data && data['id'].length === 4) {
-                        this.factureService.getFacturesByShortId(data['id'], new Date()).subscribe(
-                            facture => {
-                                this.loadData(facture);
+                        this.billService.getBillsByShortId(data['id'], new Date()).subscribe(
+                            bill => {
+                                this.loadData(bill);
                             }
                         );
                     } else {
-                        this.factureService.getFactures(data['id']).subscribe(
-                            facture => {
-                                this.loadData(facture);
+                        this.billService.getBills(data['id']).subscribe(
+                            bill => {
+                                this.loadData(bill);
                             }
                         );
                     }
@@ -49,20 +49,20 @@ export class ListPage {
         );
     }
 
-    private loadData(facture: Facture) {
+    private loadData(bill: Bill) {
         if (!this.loading) {
-            this.facture = facture;
+            this.bill = bill;
             this.sum = 0;
             this.restToTake = 0;
-            if (this.facture && this.facture.produits) {
-                this.facture.produits.forEach(product => {
+            if (this.bill && this.bill.products) {
+                this.bill.products.forEach(product => {
                     this.restToTake += product.quantity - product.uids.length;
                     this.sum += product.uids.filter(uid => this.user.uid === uid).length * product.prix;
                 });
             }
-            if (this.user && this.user.uid && this.facture && !this.facture.users.find(u => u.uid === this.user.uid)) {
-                this.facture.users.push(this.user);
-                this.factureService.addFacture(this.facture).then();
+            if (this.user && this.user.uid && this.bill && !this.bill.users.find(u => u.uid === this.user.uid)) {
+                this.bill.users.push(this.user);
+                this.billService.addBill(this.bill).then();
             }
         }
 
@@ -73,29 +73,29 @@ export class ListPage {
      * @param productIndex
      */
     public selectProduct(productIndex: number) {
-        if (this.user !== this.userShow || this.facture.done) {
+        if (this.user !== this.userShow || this.bill.done) {
             return;
         }
-        const updateFacture = this.facture;
+        const updateBill = this.bill;
         // Si la liste est pleine et que je ne suis pas dedans, je ne peux pas interragir
-        if (updateFacture.produits[productIndex].uids.length === updateFacture.produits[productIndex].quantity
-            && !updateFacture.produits[productIndex].uids.includes(this.user.uid)) {
+        if (updateBill.products[productIndex].uids.length === updateBill.products[productIndex].quantity
+            && !updateBill.products[productIndex].uids.includes(this.user.uid)) {
             return;
         }
 
         // Si il y a de la place, je me rajoute
-        if (updateFacture.produits[productIndex].uids.length < updateFacture.produits[productIndex].quantity) {
-            updateFacture.produits[productIndex].uids.push(this.user.uid);
+        if (updateBill.products[productIndex].uids.length < updateBill.products[productIndex].quantity) {
+            updateBill.products[productIndex].uids.push(this.user.uid);
         } else {
             // Si c'est plein, je m'enleve de la liste
-            updateFacture.produits[productIndex].uids = updateFacture.produits[productIndex].uids.filter(uid => uid !== this.user.uid);
+            updateBill.products[productIndex].uids = updateBill.products[productIndex].uids.filter(uid => uid !== this.user.uid);
         }
         this.loading = true;
-        this.factureService.addFacture(updateFacture).then(() => {
+        this.billService.addBill(updateBill).then(() => {
                 this.loading = false;
                 this.sum = 0;
                 this.restToTake = 0;
-                this.facture.produits.forEach(product => {
+                this.bill.products.forEach(product => {
                     this.restToTake += product.quantity - product.uids.length;
                     this.sum += product.uids.filter(uid => this.user.uid === uid).length * product.prix;
                 });
@@ -119,18 +119,18 @@ export class ListPage {
      * Passe a l'etape suivante
      */
     goToResult() {
-        this.router.navigateByUrl('result?id=' + this.facture.ID);
+        this.router.navigateByUrl('result?id=' + this.bill.ID);
     }
 
     /**
-     * Ouvre une modal permetant de diffuser l'id de la facture
+     * Ouvre une modal permetant de diffuser l'id de la bill
      */
     async openModalJoin() {
         const modal = await this.modalController.create({
             component: UserJoinPage,
             componentProps: {
                 action: 'Rejoindre',
-                id: this.facture.ID.substring(0, 4),
+                id: this.bill.ID.substring(0, 4),
             },
             cssClass: 'wideModal'
         });

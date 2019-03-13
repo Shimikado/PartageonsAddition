@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 
 import {ModalController} from '@ionic/angular';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Produit} from '../shared/models/produit';
-import {FactureService} from '../shared/services/factureService';
-import {Facture} from '../shared/models/facture';
+import {Product} from '../shared/models/product';
+import {BillService} from '../shared/services/bill.service';
+import {Bill} from '../shared/models/bill';
 import {ModalItemBillPage} from './modal-item-bill/modal-item-bill.page';
 import {AuthentificationService} from '../shared/services/authentification.service';
 import {UserInBase} from '../shared/models/userInBase';
@@ -18,14 +18,14 @@ import {AlertController} from '@ionic/angular';
 })
 export class ValidateBillPage {
 
-    public listItem: Produit[];
+    public listItem: Product[];
     private inputText: string;
     public sum: number;
     public user: UserInBase;
 
     constructor(public modalController: ModalController,
                 private router: Router,
-                private factureService: FactureService,
+                private billService: BillService,
                 private authService: AuthentificationService,
                 private activeRoute: ActivatedRoute,
                 public alertController: AlertController) {
@@ -45,7 +45,7 @@ export class ValidateBillPage {
     }
 
     /**
-     * Permet d'interpreter un texte en facture
+     * Permet d'interpreter un texte en bill
      */
     private billParser() {
         this.listItem = [];
@@ -57,7 +57,7 @@ export class ValidateBillPage {
                 const label = element.match(/[a-zA-Z ]+/)[0];
                 const quantity = element.match(/[0-9]+/)[0];
                 const devise = element.match(/€/)[0];
-                const product: Produit = {
+                const product: Product = {
                     label: label.trim(),
                     prix: +prix.trim(),
                     devise: devise.trim(),
@@ -71,25 +71,25 @@ export class ValidateBillPage {
     }
 
     /**
-     * Enregistre une facture et passe a l'etape suivante
+     * Enregistre une bill et passe a l'etape suivante
      */
     public validate() {
-        // On doit save la facture pour la rendre accessible à tous et envoyer l'id dans la page suivante
-        const produits = this.listItem;
-        const facture: Facture = new class implements Facture {
+        // On doit save la bill pour la rendre accessible à tous et envoyer l'id dans la page suivante
+        const products = this.listItem;
+        const bill: Bill = new class implements Bill {
             ID: string;
             created_date: Date;
             done: boolean;
-            produits: Produit[];
+            products: Product[];
             users: UserInBase[];
         };
-        facture.done = false;
-        facture.produits = produits;
-        facture.users = [this.user];
-        facture.created_date = new Date();
-        facture.ID = this.factureService.generateId();
-        this.factureService.addFacture(facture).then(() => {
-            this.router.navigateByUrl('list?id=' + facture.ID.substring(0, 4));
+        bill.done = false;
+        bill.products = products;
+        bill.users = [this.user];
+        bill.created_date = new Date();
+        bill.ID = this.billService.generateId();
+        this.billService.addBill(bill).then(() => {
+            this.router.navigateByUrl('list?id=' + bill.ID.substring(0, 4));
         });
     }
 
@@ -106,7 +106,7 @@ export class ValidateBillPage {
         modal.onDidDismiss()
             .then((data) => {
                 if (data.data) {
-                    const produit: Produit = data.data;
+                    const produit: Product = data.data;
                     this.listItem.push(produit);
                     this.calculateTotalAmount();
                 }
@@ -131,7 +131,7 @@ export class ValidateBillPage {
         modal.onDidDismiss()
             .then((data) => {
                 if (data.data) {
-                    const produit: Produit = data.data;
+                    const produit: Product = data.data;
                     this.listItem[i].prix = produit.prix;
                     this.listItem[i].quantity = produit.quantity;
                     this.listItem[i].label = produit.label;

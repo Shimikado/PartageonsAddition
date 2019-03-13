@@ -4,7 +4,7 @@ import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {ListPage} from './list.page';
 import {RouterTestingModule} from '@angular/router/testing';
 import {IonicStorageModule} from '@ionic/storage';
-import {FactureService} from '../shared/services/factureService';
+import {BillService} from '../shared/services/bill.service';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {of} from 'rxjs';
 import {ModalController} from '@ionic/angular';
@@ -19,7 +19,7 @@ describe('ListPage', () => {
     beforeEach(async(() => {
         factureServiceSpy = {
             getFacturesByShortId: () => {
-                return of({produits: []});
+                return of({products: []});
             }
         };
         angularFirestoreSpy = {};
@@ -28,7 +28,7 @@ describe('ListPage', () => {
             declarations: [ListPage],
             schemas: [NO_ERRORS_SCHEMA],
             providers: [
-                {provide: FactureService, useValue: factureServiceSpy},
+                {provide: BillService, useValue: factureServiceSpy},
                 {provide: AngularFirestore, useValue: angularFirestoreSpy},
                 {provide: ModalController, useValue: modalControllerSpy},
             ],

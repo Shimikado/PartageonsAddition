@@ -1,10 +1,10 @@
-import {Produit} from './produit';
+import {Product} from './product';
 import {UserInBase} from './userInBase';
 
-export interface Facture {
+export interface Bill {
     ID: string;
     created_date: Date;
     users: UserInBase[];
     done: boolean;
-    produits: Produit[];
+    products: Product[];
 }
