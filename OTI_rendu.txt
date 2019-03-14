@@ -1,4 +1,9 @@
 PARTAGEONS L'ADDITION - PLATINE - REDANT BENJAMIN / LITTIERE JEREMIE - 2018/2019
+===
+Projet GITHUB, le readme explique comment installer le projet, comment lancer les tests, comment installer SONAR:
+===
+https://github.com/Shimikado/PartageonsAddition/
+
 
 Retour d'experience OTI:
 
