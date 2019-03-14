@@ -19,7 +19,7 @@ describe('DebtPage', () => {
     beforeEach(async(() => {
         modalControllerSpy = {};
         detteServiceSpy = {
-            getDettesByUser: () => {
+            getDebtsByUser: () => {
                 return Promise.resolve();
             }
         };
