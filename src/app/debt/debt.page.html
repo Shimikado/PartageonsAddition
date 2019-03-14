@@ -13,7 +13,7 @@
             <ion-col>Doit</ion-col>
             <ion-col>A qui</ion-col>
         </ion-row>
-        <ion-row *ngFor="let dette of activeDebts" >
+        <ion-row *ngFor="let debt of activeDebts" >
             <ion-col>
                 <div class="user-bubble-little" classe="mini-width">
                     <div class="icon-bubble-little">{{debt.userWho.name[0]}}</div>
@@ -40,7 +40,7 @@
                 Remboursements effectués
             </ion-col>
         </ion-row>
-        <ion-row *ngFor="let dette of refundDebts" >
+        <ion-row *ngFor="let debt of refundDebts" >
             <ion-col>
                 <div class="user-bubble-little" classe="mini-width">
                     <div class="icon-bubble-little">{{debt.userWho.name[0]}}</div>

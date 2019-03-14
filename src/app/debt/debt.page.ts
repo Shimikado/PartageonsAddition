@@ -59,7 +59,7 @@ export class DebtPage {
         const modal = await this.modalController.create({
             component: DebtModalPage,
             componentProps: {
-                dette: debtModal,
+                debt: debtModal,
             },
             cssClass: 'wideModal'
         });
