@@ -49,6 +49,7 @@ export class ResultPage {
     }
 
     private loadData(bill: Bill) {
+        this.billAmount = 0;
         this.users_prices.forEach(userPrice => {
             userPrice.price = 0;
         });
