@@ -12,7 +12,7 @@ import {User} from '../shared/models/user';
     styleUrls: ['./historic.page.scss'],
 })
 export class HistoricPage {
-    private bills: Bill[];
+    public bills: Bill[];
     private user: User;
 
     constructor(private billService: BillService, private authService: AuthentificationService,
